@@ -1,0 +1,20 @@
+body{
+    text-align: center;
+}
+.click-button{
+    font-size: 150%;
+}
+div{
+    display: inline-block;
+    padding: 10px;
+    text-align: right;
+    vertical-align: top;
+    width: auto;
+}
+input{
+    font-size: 100%;
+}
+.upgrades{
+    margin-left: 25px;
+    text-align: left;
+}

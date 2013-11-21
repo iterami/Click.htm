@@ -1,0 +1,32 @@
+<!doctype html>
+<meta charset=utf-8>
+<title>0</title>
+<link href=css/click.css rel=stylesheet>
+
+<div>
+    <b id=clicks>0</b><br>
+    <input class=click-button onclick=click_button() type=button value=Click><br>
+    +<span id=clicks-per-click></span> per click<br>
+    +<span id=clicks-per-second></span> per second
+</div>
+
+<div class=upgrades>
+    <span id=upgrade-manual></span>
+     <input onclick=purchase('upgrade-manual',0,'clicks-per-click') type=button value=Manual>
+      <span id=upgrade-manual-cost></span><br>
+    <span id=upgrade-script></span>
+     <input onclick=purchase('upgrade-script',1,'clicks-per-second') type=button value=Script>
+      <span id=upgrade-script-cost></span><br>
+    <span id=upgrade-employee></span>
+     <input onclick=purchase('upgrade-employee',2,'clicks-per-second') type=button value=Employee>
+      <span id=upgrade-employee-cost></span><br>
+    <span id=upgrade-server></span>
+     <input onclick=purchase('upgrade-server',3,'clicks-per-second') type=button value=Server>
+      <span id=upgrade-server-cost></span>
+</div>
+
+<hr>
+
+<input onclick=reset() type=button value=Reset>
+
+<script src=js/click.js></script>
