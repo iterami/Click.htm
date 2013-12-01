@@ -18,7 +18,7 @@ function purchase(upgrade, cost, target){
 
         // increase upgrade cost
         document.getElementById(upgrade + '-cost').innerHTML = Math.pow(
-          10 + cost * 10,
+          10 + cost * 2,
           parseInt(document.getElementById(upgrade).innerHTML) + 1
         );
 
