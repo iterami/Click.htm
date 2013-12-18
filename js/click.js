@@ -9,7 +9,8 @@ function click_button(){
     // add clicks-per-click to clicks
     document.getElementById('clicks').innerHTML = 
       parseInt(document.getElementById('clicks').innerHTML)
-    + parseInt(document.getElementById('clicks-per-click').innerHTML);
+    + Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
+      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 }
 
 function purchase(upgrade, cost, target){
@@ -28,23 +29,26 @@ function purchase(upgrade, cost, target){
 
         // increase target value, either clicks-per-click or clicks-per-second
         document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
-            + (cost < 1 ? 1 : cost);
+            + (cost < 1 || cost > 4 ? 1 : cost);
     }
 }
 
 function reset(){
     if(confirm('Reset?')){
         window.localStorage.removeItem('click-clicks');
+        window.localStorage.removeItem('click-clicks-multiplier');
         window.localStorage.removeItem('click-clicks-per-click');
         window.localStorage.removeItem('click-clicks-per-second');
 
         window.localStorage.removeItem('click-upgrade-cluster');
         window.localStorage.removeItem('click-upgrade-employee');
+        window.localStorage.removeItem('click-upgrade-investor');
         window.localStorage.removeItem('click-upgrade-manual');
         window.localStorage.removeItem('click-upgrade-script');
         window.localStorage.removeItem('click-upgrade-server');
 
         document.getElementById('clicks').innerHTML = 0;
+        document.getElementById('clicks-multiplier').innerHTML = 100;
         document.getElementById('clicks-per-click').innerHTML = 1;
         document.getElementById('clicks-per-second').innerHTML = 0;
 
@@ -52,6 +56,8 @@ function reset(){
         document.getElementById('upgrade-cluster-cost').innerHTML = 18;
         document.getElementById('upgrade-employee').innerHTML = 0;
         document.getElementById('upgrade-employee-cost').innerHTML = 14;
+        document.getElementById('upgrade-investor').innerHTML = 0;
+        document.getElementById('upgrade-investor-cost').innerHTML = 20;
         document.getElementById('upgrade-manual').innerHTML = 0;
         document.getElementById('upgrade-manual-cost').innerHTML = 10;
         document.getElementById('upgrade-script').innerHTML = 0;
@@ -65,7 +71,8 @@ function second_loop(){
     if(parseInt(document.getElementById('clicks-per-second').innerHTML) > 0){
         document.getElementById('clicks').innerHTML =
           parseInt(document.getElementById('clicks').innerHTML)
-        + parseInt(document.getElementById('clicks-per-second').innerHTML);
+        + Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
+          * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
     }
     // setting the title to # of clicks makes idling easier
     document.title = document.getElementById('clicks').innerHTML;
@@ -86,6 +93,9 @@ function set_upgrade(upgrade, cost){
 document.getElementById('clicks').innerHTML = window.localStorage.getItem('click-clicks') === null
   ? 0
   : window.localStorage.getItem('click-clicks');
+document.getElementById('clicks-multiplier').innerHTML = window.localStorage.getItem('click-clicks-multiplier') === null
+  ? 100
+  : window.localStorage.getItem('click-clicks-multiplier');
 document.getElementById('clicks-per-click').innerHTML = window.localStorage.getItem('click-clicks-per-click') === null
   ? 1
   : window.localStorage.getItem('click-clicks-per-click');
@@ -95,6 +105,7 @@ document.getElementById('clicks-per-second').innerHTML = window.localStorage.get
 
 set_upgrade('cluster',  4);
 set_upgrade('employee', 2);
+set_upgrade('investor', 5);
 set_upgrade('manual',   0);
 set_upgrade('script',   1);
 set_upgrade('server',   3);
@@ -105,15 +116,18 @@ window.onbeforeunload = function(e){
     // if any progress has been made
     if(  parseInt(document.getElementById('clicks').innerHTML)            > 0
       || parseInt(document.getElementById('clicks-per-click').innerHTML)  > 1
-      || parseInt(document.getElementById('clicks-per-second').innerHTML) > 0){
+      || parseInt(document.getElementById('clicks-per-second').innerHTML) > 0
+      || parseInt(document.getElementById('clicks-multiplier').innerHTML) > 100){
         // save progress into localStorage
         window.localStorage.setItem('click-clicks',            document.getElementById('clicks').innerHTML);
+        window.localStorage.setItem('click-clicks-multiplier', document.getElementById('clicks-multiplier').innerHTML);
         window.localStorage.setItem('click-clicks-per-click',  document.getElementById('clicks-per-click').innerHTML);
         window.localStorage.setItem('click-clicks-per-second', document.getElementById('clicks-per-second').innerHTML);
 
         // save upgrades into localStorage
         window.localStorage.setItem('click-upgrade-cluster',   document.getElementById('upgrade-cluster').innerHTML);
         window.localStorage.setItem('click-upgrade-employee',  document.getElementById('upgrade-employee').innerHTML);
+        window.localStorage.setItem('click-upgrade-investor',  document.getElementById('upgrade-investor').innerHTML);
         window.localStorage.setItem('click-upgrade-manual',    document.getElementById('upgrade-manual').innerHTML);
         window.localStorage.setItem('click-upgrade-script',    document.getElementById('upgrade-script').innerHTML);
         window.localStorage.setItem('click-upgrade-server',    document.getElementById('upgrade-server').innerHTML);

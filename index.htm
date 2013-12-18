@@ -7,7 +7,8 @@
     <b id=clicks>0</b><br>
     <input class=click-button onclick=click_button() type=button value=Click><br>
     +<span id=clicks-per-click></span> per click<br>
-    +<span id=clicks-per-second></span> per second
+    +<span id=clicks-per-second></span> per second<br>
+    <span id=clicks-multiplier></span>% multiplier
 </div>
 
 <div class=upgrades>
@@ -25,7 +26,10 @@
       <span id=upgrade-server-cost></span><br>
     <span id=upgrade-cluster></span>
      <input onclick=purchase('cluster',4,'clicks-per-second') type=button value=Cluster>
-      <span id=upgrade-cluster-cost></span>
+      <span id=upgrade-cluster-cost></span><br>
+    <span id=upgrade-investor></span>
+     <input onclick=purchase('investor',5,'clicks-multiplier') type=button value=Investor>
+      <span id=upgrade-investor-cost></span>
 </div>
 
 <hr>
