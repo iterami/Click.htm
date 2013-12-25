@@ -53,17 +53,18 @@ function reset(){
         document.getElementById('clicks-per-second').innerHTML = 0;
 
         document.getElementById('upgrade-cluster').innerHTML = 0;
-        document.getElementById('upgrade-cluster-cost').innerHTML = 14;
         document.getElementById('upgrade-employee').innerHTML = 0;
-        document.getElementById('upgrade-employee-cost').innerHTML = 12;
         document.getElementById('upgrade-investor').innerHTML = 0;
-        document.getElementById('upgrade-investor-cost').innerHTML = 15;
         document.getElementById('upgrade-manual').innerHTML = 0;
-        document.getElementById('upgrade-manual-cost').innerHTML = 10;
         document.getElementById('upgrade-script').innerHTML = 0;
-        document.getElementById('upgrade-script-cost').innerHTML = 11;
         document.getElementById('upgrade-server').innerHTML = 0;
-        document.getElementById('upgrade-server-cost').innerHTML = 13;
+
+        set_upgrade('cluster',  4);
+        set_upgrade('employee', 2);
+        set_upgrade('investor', 5);
+        set_upgrade('manual',   0);
+        set_upgrade('script',   1);
+        set_upgrade('server',   3);
     }
 }
 
