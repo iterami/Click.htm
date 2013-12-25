@@ -1,6 +1,6 @@
 function calc_upgrade_cost(upgrade, cost){
     document.getElementById('upgrade-' + upgrade + '-cost').innerHTML = Math.pow(
-      10 + cost * 2,
+      10 + cost,
       parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1
     );
 }
@@ -53,17 +53,17 @@ function reset(){
         document.getElementById('clicks-per-second').innerHTML = 0;
 
         document.getElementById('upgrade-cluster').innerHTML = 0;
-        document.getElementById('upgrade-cluster-cost').innerHTML = 18;
+        document.getElementById('upgrade-cluster-cost').innerHTML = 14;
         document.getElementById('upgrade-employee').innerHTML = 0;
-        document.getElementById('upgrade-employee-cost').innerHTML = 14;
+        document.getElementById('upgrade-employee-cost').innerHTML = 12;
         document.getElementById('upgrade-investor').innerHTML = 0;
-        document.getElementById('upgrade-investor-cost').innerHTML = 20;
+        document.getElementById('upgrade-investor-cost').innerHTML = 15;
         document.getElementById('upgrade-manual').innerHTML = 0;
         document.getElementById('upgrade-manual-cost').innerHTML = 10;
         document.getElementById('upgrade-script').innerHTML = 0;
-        document.getElementById('upgrade-script-cost').innerHTML = 12;
+        document.getElementById('upgrade-script-cost').innerHTML = 11;
         document.getElementById('upgrade-server').innerHTML = 0;
-        document.getElementById('upgrade-server-cost').innerHTML = 16;
+        document.getElementById('upgrade-server-cost').innerHTML = 13;
     }
 }
 
