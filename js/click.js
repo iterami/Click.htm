@@ -59,8 +59,8 @@ function reset(){
         document.getElementById('clicks-per-click').innerHTML = 1;
         document.getElementById('clicks-per-second').innerHTML = 0;
 
-        document.getElementById('clicks-per-click-modified').innerHTML = 1;
-        document.getElementById('clicks-per-second-modified').innerHTML = 0;
+        document.getElementById('clicks-per-click-multiplied').innerHTML = 1;
+        document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
 
         document.getElementById('upgrade-cluster').innerHTML = 0;
         document.getElementById('upgrade-employee').innerHTML = 0;
