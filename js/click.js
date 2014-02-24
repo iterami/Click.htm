@@ -1,6 +1,6 @@
 function calc_upgrade_cost(upgrade, cost){
     document.getElementById('upgrade-' + upgrade + '-cost').innerHTML = Math.pow(
-      10 + cost,
+      5 + cost,
       parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1
     );
 }
@@ -30,6 +30,13 @@ function purchase(upgrade, cost, target){
         // increase target value, either clicks-per-click or clicks-per-second
         document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
             + (cost < 1 || cost > 4 ? 1 : cost);
+
+        // recalculate multiplied values
+        document.getElementById('clicks-per-click-multiplied').innerHTML = Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
+          * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+
+        document.getElementById('clicks-per-second-multiplied').innerHTML = Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
+          * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
     }
 }
 
@@ -51,6 +58,9 @@ function reset(){
         document.getElementById('clicks-multiplier').innerHTML = 100;
         document.getElementById('clicks-per-click').innerHTML = 1;
         document.getElementById('clicks-per-second').innerHTML = 0;
+
+        document.getElementById('clicks-per-click-modified').innerHTML = 1;
+        document.getElementById('clicks-per-second-modified').innerHTML = 0;
 
         document.getElementById('upgrade-cluster').innerHTML = 0;
         document.getElementById('upgrade-employee').innerHTML = 0;
@@ -103,6 +113,12 @@ document.getElementById('clicks-per-click').innerHTML = window.localStorage.getI
 document.getElementById('clicks-per-second').innerHTML = window.localStorage.getItem('click-clicks-per-second') === null
   ? 0
   : window.localStorage.getItem('click-clicks-per-second');
+
+document.getElementById('clicks-per-click-multiplied').innerHTML = Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
+  * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+
+document.getElementById('clicks-per-second-multiplied').innerHTML = Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
+  * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
 set_upgrade('cluster',  4);
 set_upgrade('employee', 2);
