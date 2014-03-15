@@ -100,6 +100,8 @@ function set_upgrade(upgrade, cost){
     calc_upgrade_cost(upgrade, cost);
 }
 
+var keyclick_ready = 1;
+
 // load values from localStorage, if they exist
 document.getElementById('clicks').innerHTML = window.localStorage.getItem('click-clicks') === null
   ? 0
@@ -150,4 +152,65 @@ window.onbeforeunload = function(e){
         window.localStorage.setItem('click-upgrade-server',    document.getElementById('upgrade-server').innerHTML);
     }
     console.log(window.localStorage.getItem('click-clicks-per-click'))
+};
+
+window.onkeydown = function(e){
+    if(keyclick_ready > 0){
+        var key = window.event ? event : e;
+        key = key.charCode ? key.charCode : key.keyCode;
+
+        if(key == 67){ // C
+            keyclick_ready = 0;
+            click_button();
+
+        }else if(key == 65){ // A
+            purchase(
+              'manual',
+              0,
+              'clicks-per-click'
+            );
+
+        }else if(key == 82){ // R
+            purchase(
+              'script',
+              1,
+              'clicks-per-second'
+            );
+
+        }else if(key == 69){  // E
+            purchase(
+              'employee',
+              2,
+              'clicks-per-second'
+            );
+
+        }else if(key == 83){ // S
+            purchase(
+              'server',
+              3,
+              'clicks-per-second'
+            );
+
+        }else if(key == 84){ // T
+            purchase(
+              'cluster',
+              4,
+              'clicks-per-second'
+            );
+
+        }else if(key == 86){ // V
+            purchase(
+              'investor',
+              5,
+              'clicks-multiplier'
+            );
+        }
+    }
+};
+
+window.onkeyup = function(e){
+    var key = window.event ? event : e;
+    if((key.charCode ? key.charCode : key.keyCode) == 67){ // C
+        keyclick_ready = 1;
+    }
 };
