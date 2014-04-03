@@ -8,7 +8,8 @@
     <input class=click-button onclick=click_button() type=button value=(C)lick><br>
     +<span id=clicks-per-click></span> per click (+<span id=clicks-per-click-multiplied></span>)<br>
     +<span id=clicks-per-second></span> per second (+<span id=clicks-per-second-multiplied></span>)<br>
-    <span id=clicks-multiplier></span>% multiplier
+    <span id=clicks-multiplier></span>% multiplier<br>
+    <input onclick=reset() type=button value=Reset>
 </div>
 
 <div class=upgrades>
@@ -31,9 +32,5 @@
      <input onclick=purchase('investor',5,'clicks-multiplier') type=button value=In(v)estor>
       <span id=upgrade-investor-cost></span>
 </div>
-
-<hr>
-
-<input onclick=reset() type=button value=Reset>
 
 <script src=js/click.js></script>
