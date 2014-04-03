@@ -1,6 +1,6 @@
 function calc_upgrade_cost(upgrade, cost){
     document.getElementById('upgrade-' + upgrade + '-cost').innerHTML = Math.pow(
-      5 + cost,
+      upgrade_base + cost,
       parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1
     );
 }
@@ -101,6 +101,7 @@ function set_upgrade(upgrade, cost){
 }
 
 var keyclick_ready = 1;
+var upgrade_base = 4;
 
 // load values from localStorage, if they exist
 document.getElementById('clicks').innerHTML = window.localStorage.getItem('click-clicks') === null
