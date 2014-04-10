@@ -75,6 +75,14 @@ function reset(){
         set_upgrade('manual',   0);
         set_upgrade('script',   1);
         set_upgrade('server',   3);
+
+        document.getElementById('hotkey-click').value = 'C';
+        document.getElementById('hotkey-manual').value = 'A';
+        document.getElementById('hotkey-script').value = 'R';
+        document.getElementById('hotkey-employee').value = 'E';
+        document.getElementById('hotkey-server').value = 'S';
+        document.getElementById('hotkey-cluster').value = 'T';
+        document.getElementById('hotkey-investor').value = 'V';
     }
 }
 
@@ -159,47 +167,48 @@ window.onkeydown = function(e){
     if(keyclick_ready > 0){
         var key = window.event ? event : e;
         key = key.charCode ? key.charCode : key.keyCode;
+        key = String.fromCharCode(key);
 
-        if(key == 67){ // C
+        if(key == document.getElementById('hotkey-click').value){
             keyclick_ready = 0;
             click_button();
 
-        }else if(key == 65){ // A
+        }else if(key == document.getElementById('hotkey-manual').value){
             purchase(
               'manual',
               0,
               'clicks-per-click'
             );
 
-        }else if(key == 82){ // R
+        }else if(key == document.getElementById('hotkey-script').value){
             purchase(
               'script',
               1,
               'clicks-per-second'
             );
 
-        }else if(key == 69){  // E
+        }else if(key == document.getElementById('hotkey-employee').value){
             purchase(
               'employee',
               2,
               'clicks-per-second'
             );
 
-        }else if(key == 83){ // S
+        }else if(key == document.getElementById('hotkey-server').value){
             purchase(
               'server',
               3,
               'clicks-per-second'
             );
 
-        }else if(key == 84){ // T
+        }else if(key == document.getElementById('hotkey-cluster').value){
             purchase(
               'cluster',
               4,
               'clicks-per-second'
             );
 
-        }else if(key == 86){ // V
+        }else if(key == document.getElementById('hotkey-investor').value){
             purchase(
               'investor',
               5,
@@ -211,7 +220,7 @@ window.onkeydown = function(e){
 
 window.onkeyup = function(e){
     var key = window.event ? event : e;
-    if((key.charCode ? key.charCode : key.keyCode) == 67){ // C
+    if(String.fromCharCode(key.charCode ? key.charCode : key.keyCode) == document.getElementById('hotkey-click').value){
         keyclick_ready = 1;
     }
 };

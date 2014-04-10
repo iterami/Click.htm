@@ -13,6 +13,10 @@ div{
 }
 input{
     font-size: 100%;
+    width: 50px;
+}
+input[type=button]{
+    width: auto;
 }
 .upgrades{
     margin-left: 25px;
