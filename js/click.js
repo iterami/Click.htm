@@ -109,7 +109,7 @@ function set_upgrade(upgrade, cost){
 }
 
 var keyclick_ready = 1;
-var upgrade_base = 4;
+var upgrade_base = 2;
 
 // load values from localStorage, if they exist
 document.getElementById('clicks').innerHTML = window.localStorage.getItem('click-clicks') === null
