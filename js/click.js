@@ -164,57 +164,57 @@ window.onbeforeunload = function(e){
 };
 
 window.onkeydown = function(e){
-    if(keyclick_ready > 0){
-        var key = window.event ? event : e;
-        key = key.charCode ? key.charCode : key.keyCode;
-        key = String.fromCharCode(key);
+    var key = window.event ? event : e;
+    key = key.charCode ? key.charCode : key.keyCode;
+    key = String.fromCharCode(key);
 
-        if(key == document.getElementById('hotkey-click').value){
+    if(key == document.getElementById('hotkey-click').value){
+        if(keyclick_ready > 0){
             keyclick_ready = 0;
             click_button();
-
-        }else if(key == document.getElementById('hotkey-manual').value){
-            purchase(
-              'manual',
-              0,
-              'clicks-per-click'
-            );
-
-        }else if(key == document.getElementById('hotkey-script').value){
-            purchase(
-              'script',
-              1,
-              'clicks-per-second'
-            );
-
-        }else if(key == document.getElementById('hotkey-employee').value){
-            purchase(
-              'employee',
-              2,
-              'clicks-per-second'
-            );
-
-        }else if(key == document.getElementById('hotkey-server').value){
-            purchase(
-              'server',
-              3,
-              'clicks-per-second'
-            );
-
-        }else if(key == document.getElementById('hotkey-cluster').value){
-            purchase(
-              'cluster',
-              4,
-              'clicks-per-second'
-            );
-
-        }else if(key == document.getElementById('hotkey-investor').value){
-            purchase(
-              'investor',
-              5,
-              'clicks-multiplier'
-            );
         }
+
+    }else if(key == document.getElementById('hotkey-manual').value){
+        purchase(
+          'manual',
+          0,
+          'clicks-per-click'
+        );
+
+    }else if(key == document.getElementById('hotkey-script').value){
+        purchase(
+          'script',
+          1,
+          'clicks-per-second'
+        );
+
+    }else if(key == document.getElementById('hotkey-employee').value){
+        purchase(
+          'employee',
+          2,
+          'clicks-per-second'
+        );
+
+    }else if(key == document.getElementById('hotkey-server').value){
+        purchase(
+          'server',
+          3,
+          'clicks-per-second'
+        );
+
+    }else if(key == document.getElementById('hotkey-cluster').value){
+        purchase(
+          'cluster',
+          4,
+          'clicks-per-second'
+        );
+
+    }else if(key == document.getElementById('hotkey-investor').value){
+        purchase(
+          'investor',
+          5,
+          'clicks-multiplier'
+        );
     }
 };
 
