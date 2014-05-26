@@ -1,4 +1,4 @@
-function calc_upgrade_cost(upgrade, cost){
+function calculate_upgrade_cost(upgrade, cost){
     document.getElementById('upgrade-' + upgrade + '-cost').innerHTML = Math.pow(
       upgrade_base + cost,
       parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1
@@ -26,7 +26,7 @@ function purchase(upgrade, cost, target){
           parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1;
 
         // increase upgrade cost
-        calc_upgrade_cost(upgrade, cost);
+        calculate_upgrade_cost(upgrade, cost);
 
         // increase target value, either clicks-per-click or clicks-per-second
         document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
@@ -126,7 +126,7 @@ function set_upgrade(upgrade, cost){
       ? 0
       : window.localStorage.getItem('click-upgrade-' + upgrade);
     
-    calc_upgrade_cost(upgrade, cost);
+    calculate_upgrade_cost(upgrade, cost);
 }
 
 var keyclick_ready = 1;
