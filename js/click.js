@@ -15,7 +15,8 @@ function click_button(){
 
 function purchase(upgrade, cost, target){
     // if user can afford upgrade
-    if(parseInt(document.getElementById('clicks').innerHTML) >= parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
+    if(parseInt(document.getElementById('clicks').innerHTML)
+      >= parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
         // subtract cost of upgrade from clicks
         document.getElementById('clicks').innerHTML =
           parseInt(document.getElementById('clicks').innerHTML)
@@ -30,7 +31,10 @@ function purchase(upgrade, cost, target){
 
         // increase target value, either clicks-per-click or clicks-per-second
         document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
-          + (cost < 1 || cost > 4 ? 1 : cost);
+          + (cost < 1 || cost > 4
+            ? 1
+            : cost
+          );
 
         // recalculate multiplied values
         document.getElementById('clicks-per-click-multiplied').innerHTML =
@@ -122,9 +126,10 @@ function second_loop(){
 }
 
 function set_upgrade(upgrade, cost){
-    document.getElementById('upgrade-' + upgrade).innerHTML = window.localStorage.getItem('click-upgrade-' + upgrade) === null
-      ? 0
-      : window.localStorage.getItem('click-upgrade-' + upgrade);
+    document.getElementById('upgrade-' + upgrade).innerHTML =
+      window.localStorage.getItem('click-upgrade-' + upgrade) === null
+        ? 0
+        : window.localStorage.getItem('click-upgrade-' + upgrade);
     
     calculate_upgrade_cost(upgrade, cost);
 }
@@ -133,23 +138,32 @@ var keyclick_ready = 1;
 var upgrade_base = 2;
 
 // load values from localStorage, if they exist
-document.getElementById('clicks').innerHTML = window.localStorage.getItem('click-clicks') === null
-  ? 0
-  : window.localStorage.getItem('click-clicks');
-document.getElementById('clicks-multiplier').innerHTML = window.localStorage.getItem('click-clicks-multiplier') === null
-  ? 100
-  : window.localStorage.getItem('click-clicks-multiplier');
-document.getElementById('clicks-per-click').innerHTML = window.localStorage.getItem('click-clicks-per-click') === null
-  ? 1
-  : window.localStorage.getItem('click-clicks-per-click');
-document.getElementById('clicks-per-second').innerHTML = window.localStorage.getItem('click-clicks-per-second') === null
-  ? 0
-  : window.localStorage.getItem('click-clicks-per-second');
+document.getElementById('clicks').innerHTML =
+  window.localStorage.getItem('click-clicks') === null
+    ? 0
+    : window.localStorage.getItem('click-clicks');
 
-document.getElementById('clicks-per-click-multiplied').innerHTML = Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
+document.getElementById('clicks-multiplier').innerHTML =
+  window.localStorage.getItem('click-clicks-multiplier') === null
+    ? 100
+    : window.localStorage.getItem('click-clicks-multiplier');
+
+document.getElementById('clicks-per-click').innerHTML =
+  window.localStorage.getItem('click-clicks-per-click') === null
+    ? 1
+    : window.localStorage.getItem('click-clicks-per-click');
+
+document.getElementById('clicks-per-second').innerHTML =
+  window.localStorage.getItem('click-clicks-per-second') === null
+    ? 0
+    : window.localStorage.getItem('click-clicks-per-second');
+
+document.getElementById('clicks-per-click-multiplied').innerHTML =
+  Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
   * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
-document.getElementById('clicks-per-second-multiplied').innerHTML = Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
+document.getElementById('clicks-per-second-multiplied').innerHTML =
+  Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
   * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
 set_upgrade(
@@ -177,7 +191,10 @@ set_upgrade(
   3
 );
 
-setTimeout('second_loop()', 1000);
+setTimeout(
+  'second_loop()',
+  1000
+);
 
 window.onbeforeunload = function(e){
     // if any progress has been made
@@ -287,7 +304,9 @@ window.onkeydown = function(e){
 
 window.onkeyup = function(e){
     var key = window.event ? event : e;
-    if(String.fromCharCode(key.charCode ? key.charCode : key.keyCode) == document.getElementById('hotkey-click').value){
+    key = String.fromCharCode(key.charCode ? key.charCode : key.keyCode);
+
+    if(key == document.getElementById('hotkey-click').value){
         keyclick_ready = 1;
     }
 };
