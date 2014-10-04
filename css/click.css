@@ -1,4 +1,6 @@
 body{
+    background: #000;
+    color: #aaa;
     text-align: center;
 }
 .click-button{
@@ -12,6 +14,8 @@ div{
     width: auto;
 }
 input{
+    background: #000;
+    color: #aaa;
     font-size: 100%;
     width: 50px;
 }
