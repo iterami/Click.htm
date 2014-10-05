@@ -1,6 +1,7 @@
 body{
     background: #000;
     color: #aaa;
+    font-family: sans-serif;
     text-align: center;
 }
 .click-button{
