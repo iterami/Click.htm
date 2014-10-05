@@ -13,31 +13,6 @@
     <input onclick=reset() type=button value=Reset>
 </div>
 
-<div class=upgrades>
-    <span id=upgrade-manual></span>
-     <input onclick=purchase('manual',0,'clicks-per-click') type=button value=Manual>
-       <input id=hotkey-manual maxlength=1 value=A>
-        <span id=upgrade-manual-cost></span><br>
-    <span id=upgrade-script></span>
-     <input onclick=purchase('script',1,'clicks-per-second') type=button value=Script>
-       <input id=hotkey-script maxlength=1 value=R>
-        <span id=upgrade-script-cost></span><br>
-    <span id=upgrade-employee></span>
-     <input onclick=purchase('employee',2,'clicks-per-second') type=button value=Employee>
-       <input id=hotkey-employee maxlength=1 value=E>
-        <span id=upgrade-employee-cost></span><br>
-    <span id=upgrade-server></span>
-     <input onclick=purchase('server',3,'clicks-per-second') type=button value=Server>
-       <input id=hotkey-server maxlength=1 value=S>
-        <span id=upgrade-server-cost></span><br>
-    <span id=upgrade-cluster></span>
-     <input onclick=purchase('cluster',4,'clicks-per-second') type=button value=Cluster>
-       <input id=hotkey-cluster maxlength=1 value=T>
-        <span id=upgrade-cluster-cost></span><br>
-    <span id=upgrade-investor></span>
-     <input onclick=purchase('investor',5,'clicks-multiplier') type=button value=Investor>
-       <input id=hotkey-investor maxlength=1 value=V>
-        <span id=upgrade-investor-cost></span>
-</div>
+<div id=upgrades></div>
 
 <script src=js/click.js></script>

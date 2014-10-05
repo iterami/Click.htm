@@ -23,7 +23,7 @@ input{
 input[type=button]{
     width: auto;
 }
-.upgrades{
+#upgrades{
     margin-left: 25px;
     text-align: left;
 }

@@ -54,13 +54,6 @@ function reset(){
         window.localStorage.removeItem('click-clicks-per-click');
         window.localStorage.removeItem('click-clicks-per-second');
 
-        window.localStorage.removeItem('click-upgrade-cluster');
-        window.localStorage.removeItem('click-upgrade-employee');
-        window.localStorage.removeItem('click-upgrade-investor');
-        window.localStorage.removeItem('click-upgrade-manual');
-        window.localStorage.removeItem('click-upgrade-script');
-        window.localStorage.removeItem('click-upgrade-server');
-
         document.getElementById('clicks').innerHTML = 0;
         document.getElementById('clicks-multiplier').innerHTML = 100;
         document.getElementById('clicks-per-click').innerHTML = 1;
@@ -69,45 +62,19 @@ function reset(){
         document.getElementById('clicks-per-click-multiplied').innerHTML = 1;
         document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
 
-        document.getElementById('upgrade-cluster').innerHTML = 0;
-        document.getElementById('upgrade-employee').innerHTML = 0;
-        document.getElementById('upgrade-investor').innerHTML = 0;
-        document.getElementById('upgrade-manual').innerHTML = 0;
-        document.getElementById('upgrade-script').innerHTML = 0;
-        document.getElementById('upgrade-server').innerHTML = 0;
-
-        set_upgrade(
-          'cluster',
-          4
-        );
-        set_upgrade(
-          'employee',
-          2
-        );
-        set_upgrade(
-          'investor',
-          5
-        );
-        set_upgrade(
-          'manual',
-          0
-        );
-        set_upgrade(
-          'script',
-          1
-        );
-        set_upgrade(
-          'server',
-          3
-        );
-
         document.getElementById('hotkey-click').value = 'C';
-        document.getElementById('hotkey-manual').value = 'A';
-        document.getElementById('hotkey-script').value = 'R';
-        document.getElementById('hotkey-employee').value = 'E';
-        document.getElementById('hotkey-server').value = 'S';
-        document.getElementById('hotkey-cluster').value = 'T';
-        document.getElementById('hotkey-investor').value = 'V';
+
+        for(id in upgrades){
+            window.localStorage.removeItem('click-upgrade-' + upgrades[id][0]);
+
+            document.getElementById('upgrade-' + upgrades[id][0]).innerHTML = 0;
+            document.getElementById('hotkey-' + upgrades[id][0]).value = upgrades[id][2];
+
+            set_upgrade(
+              upgrades[id][0],
+              upgrades[id][1]
+            );
+        }
     }
 }
 
@@ -122,7 +89,10 @@ function second_loop(){
     document.title = document.getElementById('clicks').innerHTML;
 
     // there is always another second
-    setTimeout('second_loop()', 1000);
+    setTimeout(
+      'second_loop()',
+      1000
+    );
 }
 
 function set_upgrade(upgrade, cost){
@@ -136,6 +106,14 @@ function set_upgrade(upgrade, cost){
 
 var keyclick_ready = 1;
 var upgrade_base = 2;
+var upgrades = [
+  ['manual', 0, 'A', 'per-click'],
+  ['script', 1, 'R', 'per-second'],
+  ['employee', 2, 'E', 'per-second'],
+  ['server', 3, 'S', 'per-second'],
+  ['cluster', 4, 'T', 'per-second'],
+  ['investor', 5, 'V', 'multiplier'],
+];
 
 // load values from localStorage, if they exist
 document.getElementById('clicks').innerHTML =
@@ -166,30 +144,22 @@ document.getElementById('clicks-per-second-multiplied').innerHTML =
   Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
   * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
-set_upgrade(
-  'cluster',
-  4
-);
-set_upgrade(
-  'employee',
-  2
-);
-set_upgrade(
-  'investor',
-  5
-);
-set_upgrade(
-  'manual',
-  0
-);
-set_upgrade(
-  'script',
-  1
-);
-set_upgrade(
-  'server',
-  3
-);
+for(id in upgrades){
+    document.getElementById('upgrades').innerHTML +=
+      '<span id=upgrade-' + upgrades[id][0] + '></span>'
+      + ' <input onclick=purchase('
+        + upgrades[id][0] + ','
+        + upgrades[id][1] + ','
+        + 'clicks-' + upgrades[id][3]
+      + ') type=button value=' + upgrades[id][0] + '>'
+      + ' <input id=hotkey-' + upgrades[id][0] + ' maxlength=1 value=' + upgrades[id][2] + '>'
+      + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>'
+
+    set_upgrade(
+      upgrades[id][0],
+      upgrades[id][1]
+    );
+}
 
 setTimeout(
   'second_loop()',
@@ -221,30 +191,12 @@ window.onbeforeunload = function(e){
         );
 
         // save upgrades into localStorage
-        window.localStorage.setItem(
-          'click-upgrade-cluster',
-          document.getElementById('upgrade-cluster').innerHTML
-        );
-        window.localStorage.setItem(
-          'click-upgrade-employee',
-          document.getElementById('upgrade-employee').innerHTML
-        );
-        window.localStorage.setItem(
-          'click-upgrade-investor',
-          document.getElementById('upgrade-investor').innerHTML
-        );
-        window.localStorage.setItem(
-          'click-upgrade-manual',
-          document.getElementById('upgrade-manual').innerHTML
-        );
-        window.localStorage.setItem(
-          'click-upgrade-script',
-          document.getElementById('upgrade-script').innerHTML
-        );
-        window.localStorage.setItem(
-          'click-upgrade-server',
-          document.getElementById('upgrade-server').innerHTML
-        );
+        for(id in upgrades){
+            window.localStorage.setItem(
+              'click-upgrade-' + upgrades[id][0],
+              document.getElementById('upgrade-' + upgrades[id][0]).innerHTML
+            );
+        }
     }
 };
 
@@ -258,47 +210,16 @@ window.onkeydown = function(e){
             click_button();
         }
 
-    }else if(key == document.getElementById('hotkey-manual').value){
-        purchase(
-          'manual',
-          0,
-          'clicks-per-click'
-        );
-
-    }else if(key == document.getElementById('hotkey-script').value){
-        purchase(
-          'script',
-          1,
-          'clicks-per-second'
-        );
-
-    }else if(key == document.getElementById('hotkey-employee').value){
-        purchase(
-          'employee',
-          2,
-          'clicks-per-second'
-        );
-
-    }else if(key == document.getElementById('hotkey-server').value){
-        purchase(
-          'server',
-          3,
-          'clicks-per-second'
-        );
-
-    }else if(key == document.getElementById('hotkey-cluster').value){
-        purchase(
-          'cluster',
-          4,
-          'clicks-per-second'
-        );
-
-    }else if(key == document.getElementById('hotkey-investor').value){
-        purchase(
-          'investor',
-          5,
-          'clicks-multiplier'
-        );
+    }else{
+        for(id in upgrades){
+            if(key == document.getElementById('hotkey-' + upgrades[id][0]).value){
+                purchase(
+                  upgrades[id][0],
+                  upgrades[id][1],
+                  'clicks-' + upgrades[id][3]
+                );
+            }
+        }
     }
 };
 
