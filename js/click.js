@@ -49,10 +49,10 @@ function purchase(upgrade, cost, target){
 
 function reset(){
     if(confirm('Reset?')){
-        window.localStorage.removeItem('click-clicks');
-        window.localStorage.removeItem('click-clicks-multiplier');
-        window.localStorage.removeItem('click-clicks-per-click');
-        window.localStorage.removeItem('click-clicks-per-second');
+        window.localStorage.removeItem('Click.htm-clicks');
+        window.localStorage.removeItem('Click.htm-clicks-multiplier');
+        window.localStorage.removeItem('Click.htm-clicks-per-click');
+        window.localStorage.removeItem('Click.htm-clicks-per-second');
 
         document.getElementById('clicks').innerHTML = 0;
         document.getElementById('clicks-multiplier').innerHTML = 100;
@@ -65,7 +65,7 @@ function reset(){
         document.getElementById('hotkey-click').value = 'C';
 
         for(id in upgrades){
-            window.localStorage.removeItem('click-upgrade-' + upgrades[id][0]);
+            window.localStorage.removeItem('Click.htm-upgrade-' + upgrades[id][0]);
 
             document.getElementById('upgrade-' + upgrades[id][0]).innerHTML = 0;
             document.getElementById('hotkey-' + upgrades[id][0]).value = upgrades[id][2];
@@ -97,9 +97,9 @@ function second_loop(){
 
 function set_upgrade(upgrade, cost){
     document.getElementById('upgrade-' + upgrade).innerHTML =
-      window.localStorage.getItem('click-upgrade-' + upgrade) === null
+      window.localStorage.getItem('Click.htm-upgrade-' + upgrade) === null
         ? 0
-        : window.localStorage.getItem('click-upgrade-' + upgrade);
+        : window.localStorage.getItem('Click.htm-upgrade-' + upgrade);
     
     calculate_upgrade_cost(upgrade, cost);
 }
@@ -117,24 +117,24 @@ var upgrades = [
 
 // load values from localStorage, if they exist
 document.getElementById('clicks').innerHTML =
-  window.localStorage.getItem('click-clicks') === null
+  window.localStorage.getItem('Click.htm-clicks') === null
     ? 0
-    : window.localStorage.getItem('click-clicks');
+    : window.localStorage.getItem('Click.htm-clicks');
 
 document.getElementById('clicks-multiplier').innerHTML =
-  window.localStorage.getItem('click-clicks-multiplier') === null
+  window.localStorage.getItem('Click.htm-clicks-multiplier') === null
     ? 100
-    : window.localStorage.getItem('click-clicks-multiplier');
+    : window.localStorage.getItem('Click.htm-clicks-multiplier');
 
 document.getElementById('clicks-per-click').innerHTML =
-  window.localStorage.getItem('click-clicks-per-click') === null
+  window.localStorage.getItem('Click.htm-clicks-per-click') === null
     ? 1
-    : window.localStorage.getItem('click-clicks-per-click');
+    : window.localStorage.getItem('Click.htm-clicks-per-click');
 
 document.getElementById('clicks-per-second').innerHTML =
-  window.localStorage.getItem('click-clicks-per-second') === null
+  window.localStorage.getItem('Click.htm-clicks-per-second') === null
     ? 0
-    : window.localStorage.getItem('click-clicks-per-second');
+    : window.localStorage.getItem('Click.htm-clicks-per-second');
 
 document.getElementById('clicks-per-click-multiplied').innerHTML =
   Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
@@ -174,26 +174,26 @@ window.onbeforeunload = function(e){
       || parseInt(document.getElementById('clicks-multiplier').innerHTML) > 100){
         // save progress into localStorage
         window.localStorage.setItem(
-          'click-clicks',
+          'Click.htm-clicks',
           document.getElementById('clicks').innerHTML
         );
         window.localStorage.setItem(
-          'click-clicks-multiplier',
+          'Click.htm-clicks-multiplier',
           document.getElementById('clicks-multiplier').innerHTML
         );
         window.localStorage.setItem(
-          'click-clicks-per-click',
+          'Click.htm-clicks-per-click',
           document.getElementById('clicks-per-click').innerHTML
         );
         window.localStorage.setItem(
-          'click-clicks-per-second',
+          'Click.htm-clicks-per-second',
           document.getElementById('clicks-per-second').innerHTML
         );
 
         // save upgrades into localStorage
         for(id in upgrades){
             window.localStorage.setItem(
-              'click-upgrade-' + upgrades[id][0],
+              'Click.htm-upgrade-' + upgrades[id][0],
               document.getElementById('upgrade-' + upgrades[id][0]).innerHTML
             );
         }
