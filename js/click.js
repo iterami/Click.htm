@@ -153,7 +153,7 @@ for(id in upgrades){
         + 'clicks-' + upgrades[id][3]
       + ') type=button value=' + upgrades[id][0] + '>'
       + ' <input id=hotkey-' + upgrades[id][0] + ' maxlength=1 value=' + upgrades[id][2] + '>'
-      + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>'
+      + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
 
     set_upgrade(
       upgrades[id][0],
@@ -210,15 +210,16 @@ window.onkeydown = function(e){
             click_button();
         }
 
-    }else{
-        for(id in upgrades){
-            if(key == document.getElementById('hotkey-' + upgrades[id][0]).value){
-                purchase(
-                  upgrades[id][0],
-                  upgrades[id][1],
-                  'clicks-' + upgrades[id][3]
-                );
-            }
+        return;
+    }
+
+    for(id in upgrades){
+        if(key == document.getElementById('hotkey-' + upgrades[id][0]).value){
+            purchase(
+              upgrades[id][0],
+              upgrades[id][1],
+              'clicks-' + upgrades[id][3]
+            );
         }
     }
 };
