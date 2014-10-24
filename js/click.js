@@ -6,7 +6,7 @@ function calculate_upgrade_cost(upgrade, cost){
 }
 
 function click_button(){
-    // add clicks-per-click to clicks
+    // Add clicks-per-click to clicks.
     document.getElementById('clicks').innerHTML = 
       parseInt(document.getElementById('clicks').innerHTML)
       + Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
@@ -14,67 +14,71 @@ function click_button(){
 }
 
 function purchase(upgrade, cost, target){
-    // if user can afford upgrade
     if(parseInt(document.getElementById('clicks').innerHTML)
-      >= parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
-        // subtract cost of upgrade from clicks
-        document.getElementById('clicks').innerHTML =
-          parseInt(document.getElementById('clicks').innerHTML)
-        - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
-
-        // increase upgrade
-        document.getElementById('upgrade-' + upgrade).innerHTML =
-          parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1;
-
-        // increase upgrade cost
-        calculate_upgrade_cost(upgrade, cost);
-
-        // increase target value, either clicks-per-click or clicks-per-second
-        document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
-          + (cost < 1 || cost > 4
-            ? 1
-            : cost
-          );
-
-        // recalculate multiplied values
-        document.getElementById('clicks-per-click-multiplied').innerHTML =
-          Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
-          * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
-
-        document.getElementById('clicks-per-second-multiplied').innerHTML =
-          Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
-          * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+      < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
+        return;
     }
+
+    // If user can afford upgrade...
+    //   ...subtract cost of upgrade from clicks...
+    document.getElementById('clicks').innerHTML =
+      parseInt(document.getElementById('clicks').innerHTML)
+    - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
+
+    // ...and increase upgrade...
+    document.getElementById('upgrade-' + upgrade).innerHTML =
+      parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1;
+
+    // ...and increase upgrade cost...
+    calculate_upgrade_cost(upgrade, cost);
+
+    // ...and increase target value, either clicks-per-click or clicks-per-second...
+    document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
+      + (cost < 1 || cost > 4
+        ? 1
+        : cost
+      );
+
+    // ...and recalculate multiplied values.
+    document.getElementById('clicks-per-click-multiplied').innerHTML =
+      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
+      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+
+    document.getElementById('clicks-per-second-multiplied').innerHTML =
+      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
+      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 }
 
 function reset(){
-    if(confirm('Reset?')){
-        window.localStorage.removeItem('Click.htm-clicks');
-        window.localStorage.removeItem('Click.htm-clicks-multiplier');
-        window.localStorage.removeItem('Click.htm-clicks-per-click');
-        window.localStorage.removeItem('Click.htm-clicks-per-second');
+    if(!confirm('Reset?')){
+        return;
+    }
 
-        document.getElementById('clicks').innerHTML = 0;
-        document.getElementById('clicks-multiplier').innerHTML = 100;
-        document.getElementById('clicks-per-click').innerHTML = 1;
-        document.getElementById('clicks-per-second').innerHTML = 0;
+    window.localStorage.removeItem('Click.htm-clicks');
+    window.localStorage.removeItem('Click.htm-clicks-multiplier');
+    window.localStorage.removeItem('Click.htm-clicks-per-click');
+    window.localStorage.removeItem('Click.htm-clicks-per-second');
 
-        document.getElementById('clicks-per-click-multiplied').innerHTML = 1;
-        document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
+    document.getElementById('clicks').innerHTML = 0;
+    document.getElementById('clicks-multiplier').innerHTML = 100;
+    document.getElementById('clicks-per-click').innerHTML = 1;
+    document.getElementById('clicks-per-second').innerHTML = 0;
 
-        document.getElementById('hotkey-click').value = 'C';
+    document.getElementById('clicks-per-click-multiplied').innerHTML = 1;
+    document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
 
-        for(id in upgrades){
-            window.localStorage.removeItem('Click.htm-upgrade-' + upgrades[id][0]);
+    document.getElementById('hotkey-click').value = 'C';
 
-            document.getElementById('upgrade-' + upgrades[id][0]).innerHTML = 0;
-            document.getElementById('hotkey-' + upgrades[id][0]).value = upgrades[id][2];
+    for(id in upgrades){
+        window.localStorage.removeItem('Click.htm-upgrade-' + upgrades[id][0]);
 
-            set_upgrade(
-              upgrades[id][0],
-              upgrades[id][1]
-            );
-        }
+        document.getElementById('upgrade-' + upgrades[id][0]).innerHTML = 0;
+        document.getElementById('hotkey-' + upgrades[id][0]).value = upgrades[id][2];
+
+        set_upgrade(
+          upgrades[id][0],
+          upgrades[id][1]
+        );
     }
 }
 
@@ -85,10 +89,11 @@ function second_loop(){
         + Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
           * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
     }
-    // setting the title to # of clicks makes idling easier
+
+    // Setting the title to # of clicks makes idling easier.
     document.title = document.getElementById('clicks').innerHTML;
 
-    // there is always another second
+    // There is always another second.
     setTimeout(
       'second_loop()',
       1000
@@ -115,7 +120,7 @@ var upgrades = [
   ['investor', 5, 'V', 'multiplier'],
 ];
 
-// load values from localStorage, if they exist
+// Load values from window.localStorage, if they exist.
 document.getElementById('clicks').innerHTML =
   window.localStorage.getItem('Click.htm-clicks') === null
     ? 0
@@ -167,12 +172,12 @@ setTimeout(
 );
 
 window.onbeforeunload = function(e){
-    // if any progress has been made
+    // If any progress has been made.
     if(parseInt(document.getElementById('clicks').innerHTML) > 0
       || parseInt(document.getElementById('clicks-per-click').innerHTML) > 1
       || parseInt(document.getElementById('clicks-per-second').innerHTML) > 0
       || parseInt(document.getElementById('clicks-multiplier').innerHTML) > 100){
-        // save progress into localStorage
+        // Save progress into window.localStorage.
         window.localStorage.setItem(
           'Click.htm-clicks',
           document.getElementById('clicks').innerHTML
@@ -190,7 +195,7 @@ window.onbeforeunload = function(e){
           document.getElementById('clicks-per-second').innerHTML
         );
 
-        // save upgrades into localStorage
+        // Save upgrades into window.localStorage.
         for(id in upgrades){
             window.localStorage.setItem(
               'Click.htm-upgrade-' + upgrades[id][0],
