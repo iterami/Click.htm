@@ -255,8 +255,7 @@ window.onbeforeunload = function(e){
 };
 
 window.onkeydown = function(e){
-    var key = window.event ? event : e;
-    key = String.fromCharCode(key.charCode ? key.charCode : key.keyCode);
+    var key = String.fromCharCode(e.keyCode || e.which);
 
     if(key == document.getElementById('hotkey-click').value){
         if(keyclick_ready > 0){
@@ -279,8 +278,7 @@ window.onkeydown = function(e){
 };
 
 window.onkeyup = function(e){
-    var key = window.event ? event : e;
-    key = String.fromCharCode(key.charCode ? key.charCode : key.keyCode);
+    var key = String.fromCharCode(e.keyCode || e.which);
 
     if(key == document.getElementById('hotkey-click').value){
         keyclick_ready = 1;
