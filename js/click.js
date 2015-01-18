@@ -48,19 +48,19 @@ function init(){
       Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
       * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
-    for(id in upgrades){
+    for(var id in upgrades){
         document.getElementById('upgrades').innerHTML +=
           '<span id=upgrade-' + upgrades[id][0] + '></span>'
-          + ' <input onclick=purchase('
-            + upgrades[id][0] + ','
-            + upgrades[id][1] + ','
+          + ' <input onclick=purchase("'
+            + upgrades[id][0] + '",'
+            + upgrades[id][1] + ',"'
             + 'clicks-' + upgrades[id][3]
-          + ') type=button value=' + upgrades[id][0] + '>'
+          + '") type=button value=' + upgrades[id][0] + '>'
           + ' <input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
           + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
     }
 
-    for(id in upgrades){
+    for(var id in upgrades){
         document.getElementById('hotkey-' + upgrades[id][0]).value =
           window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]) === null
             ? upgrades[id][2]
@@ -132,7 +132,7 @@ function reset_score(){
     document.getElementById('clicks-per-click-multiplied').innerHTML = 1;
     document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
 
-    for(id in upgrades){
+    for(var id in upgrades){
         window.localStorage.removeItem('Click.htm-upgrade-' + upgrades[id][0]);
 
         document.getElementById('upgrade-' + upgrades[id][0]).innerHTML = 0;
@@ -152,7 +152,7 @@ function reset_settings(){
     window.localStorage.removeItem('Click.htm-hotkey-click');
     document.getElementById('hotkey-click').value = 'C';
 
-    for(id in upgrades){
+    for(var id in upgrades){
         window.localStorage.removeItem('Click.htm-hotkey-' + upgrades[id][0]);
         document.getElementById('hotkey-' + upgrades[id][0]).value = upgrades[id][2];
     }
@@ -221,7 +221,7 @@ window.onbeforeunload = function(e){
         );
 
         // Save upgrades into window.localStorage.
-        for(id in upgrades){
+        for(var id in upgrades){
             window.localStorage.setItem(
               'Click.htm-upgrade-' + upgrades[id][0],
               document.getElementById('upgrade-' + upgrades[id][0]).innerHTML
@@ -241,7 +241,7 @@ window.onbeforeunload = function(e){
     }
 
     // Save upgrade hotkeys, if different from default.
-    for(id in upgrades){
+    for(var id in upgrades){
         if(document.getElementById('hotkey-' + upgrades[id][0]).value != upgrades[id][2]){
             window.localStorage.setItem(
               'Click.htm-hotkey-' + upgrades[id][0],
@@ -266,7 +266,7 @@ window.onkeydown = function(e){
         return;
     }
 
-    for(id in upgrades){
+    for(var id in upgrades){
         if(key == document.getElementById('hotkey-' + upgrades[id][0]).value){
             purchase(
               upgrades[id][0],
