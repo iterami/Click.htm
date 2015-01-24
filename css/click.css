@@ -19,6 +19,7 @@ input{
     color: #aaa;
     font-size: 100%;
     width: 50px;
+    text-align: center;
 }
 input[type=button]{
     width: auto;
