@@ -13,71 +13,6 @@ function click_button(){
       * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 }
 
-function init(){
-    // Load values from window.localStorage, if they exist.
-    document.getElementById('clicks').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks') === null
-        ? 0
-        : window.localStorage.getItem('Click.htm-clicks');
-
-    document.getElementById('hotkey-click').value =
-      window.localStorage.getItem('Click.htm-hotkey-click') === null
-        ? 'C'
-        : window.localStorage.getItem('Click.htm-hotkey-click');
-
-    document.getElementById('clicks-multiplier').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks-multiplier') === null
-        ? 100
-        : window.localStorage.getItem('Click.htm-clicks-multiplier');
-
-    document.getElementById('clicks-per-click').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks-per-click') === null
-        ? 1
-        : window.localStorage.getItem('Click.htm-clicks-per-click');
-
-    document.getElementById('clicks-per-second').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks-per-second') === null
-        ? 0
-        : window.localStorage.getItem('Click.htm-clicks-per-second');
-
-    document.getElementById('clicks-per-click-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
-
-    document.getElementById('clicks-per-second-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
-
-    for(var id in upgrades){
-        document.getElementById('upgrades').innerHTML +=
-          '<span id=upgrade-' + upgrades[id][0] + '></span>'
-          + ' <input onclick=purchase("'
-            + upgrades[id][0] + '",'
-            + upgrades[id][1] + ',"'
-            + 'clicks-' + upgrades[id][3]
-          + '") type=button value=' + upgrades[id][0] + '>'
-          + ' <input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
-          + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
-    }
-
-    for(var id in upgrades){
-        document.getElementById('hotkey-' + upgrades[id][0]).value =
-          window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]) === null
-            ? upgrades[id][2]
-            : window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]);
-
-        set_upgrade(
-          upgrades[id][0],
-          upgrades[id][1]
-        );
-    }
-
-    setTimeout(
-      'second_loop()',
-      1000
-    );
-}
-
 function purchase(upgrade, cost, target){
     if(parseInt(document.getElementById('clicks').innerHTML)
       < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
@@ -285,4 +220,67 @@ window.onkeyup = function(e){
     }
 };
 
-window.onload = init;
+window.onload = function init(){
+    // Load values from window.localStorage, if they exist.
+    document.getElementById('clicks').innerHTML =
+      window.localStorage.getItem('Click.htm-clicks') === null
+        ? 0
+        : window.localStorage.getItem('Click.htm-clicks');
+
+    document.getElementById('hotkey-click').value =
+      window.localStorage.getItem('Click.htm-hotkey-click') === null
+        ? 'C'
+        : window.localStorage.getItem('Click.htm-hotkey-click');
+
+    document.getElementById('clicks-multiplier').innerHTML =
+      window.localStorage.getItem('Click.htm-clicks-multiplier') === null
+        ? 100
+        : window.localStorage.getItem('Click.htm-clicks-multiplier');
+
+    document.getElementById('clicks-per-click').innerHTML =
+      window.localStorage.getItem('Click.htm-clicks-per-click') === null
+        ? 1
+        : window.localStorage.getItem('Click.htm-clicks-per-click');
+
+    document.getElementById('clicks-per-second').innerHTML =
+      window.localStorage.getItem('Click.htm-clicks-per-second') === null
+        ? 0
+        : window.localStorage.getItem('Click.htm-clicks-per-second');
+
+    document.getElementById('clicks-per-click-multiplied').innerHTML =
+      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
+      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+
+    document.getElementById('clicks-per-second-multiplied').innerHTML =
+      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
+      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+
+    for(var id in upgrades){
+        document.getElementById('upgrades').innerHTML +=
+          '<span id=upgrade-' + upgrades[id][0] + '></span>'
+          + ' <input onclick=purchase("'
+            + upgrades[id][0] + '",'
+            + upgrades[id][1] + ',"'
+            + 'clicks-' + upgrades[id][3]
+          + '") type=button value=' + upgrades[id][0] + '>'
+          + ' <input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
+          + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
+    }
+
+    for(var id in upgrades){
+        document.getElementById('hotkey-' + upgrades[id][0]).value =
+          window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]) === null
+            ? upgrades[id][2]
+            : window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]);
+
+        set_upgrade(
+          upgrades[id][0],
+          upgrades[id][1]
+        );
+    }
+
+    setTimeout(
+      'second_loop()',
+      1000
+    );
+};
