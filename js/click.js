@@ -220,7 +220,7 @@ window.onkeyup = function(e){
     }
 };
 
-window.onload = function init(){
+window.onload = function(){
     // Load values from window.localStorage, if they exist.
     document.getElementById('clicks').innerHTML =
       window.localStorage.getItem('Click.htm-clicks') === null
