@@ -202,13 +202,15 @@ window.onkeydown = function(e){
     }
 
     for(var id in upgrades){
-        if(key == document.getElementById('hotkey-' + upgrades[id][0]).value){
-            purchase(
-              upgrades[id][0],
-              upgrades[id][1],
-              'clicks-' + upgrades[id][3]
-            );
+        if(key != document.getElementById('hotkey-' + upgrades[id][0]).value){
+            continue;
         }
+
+        purchase(
+          upgrades[id][0],
+          upgrades[id][1],
+          'clicks-' + upgrades[id][3]
+        );
     }
 };
 
@@ -222,30 +224,24 @@ window.onkeyup = function(e){
 
 window.onload = function(){
     // Load values from window.localStorage, if they exist.
-    document.getElementById('clicks').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks') === null
-        ? 0
-        : window.localStorage.getItem('Click.htm-clicks');
-
     document.getElementById('hotkey-click').value =
       window.localStorage.getItem('Click.htm-hotkey-click') === null
         ? 'C'
         : window.localStorage.getItem('Click.htm-hotkey-click');
 
-    document.getElementById('clicks-multiplier').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks-multiplier') === null
-        ? 100
-        : window.localStorage.getItem('Click.htm-clicks-multiplier');
+    var values = {
+      'clicks': 0,
+      'clicks-multiplier': 100,
+      'clicks-per-click': 1,
+      'clicks-per-second': 0,
+    };
 
-    document.getElementById('clicks-per-click').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks-per-click') === null
-        ? 1
-        : window.localStorage.getItem('Click.htm-clicks-per-click');
-
-    document.getElementById('clicks-per-second').innerHTML =
-      window.localStorage.getItem('Click.htm-clicks-per-second') === null
-        ? 0
-        : window.localStorage.getItem('Click.htm-clicks-per-second');
+    for(var value in values){
+        document.getElementById(value).innerHTML =
+          window.localStorage.getItem('Click.htm-' + value) === null
+            ? values[value]
+            : window.localStorage.getItem('Click.htm-' + value);
+    }
 
     document.getElementById('clicks-per-click-multiplied').innerHTML =
       Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
@@ -267,7 +263,7 @@ window.onload = function(){
           + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
     }
 
-    for(var id in upgrades){
+    for(id in upgrades){
         document.getElementById('hotkey-' + upgrades[id][0]).value =
           window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]) === null
             ? upgrades[id][2]
