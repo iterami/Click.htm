@@ -120,15 +120,33 @@ function set_upgrade(upgrade, cost){
     calculate_upgrade_cost(upgrade, cost);
 }
 
+function settings_toggle(){
+    var display = 'none';
+
+    if(document.getElementById('settings-button').value === '-'){
+        document.getElementById('settings-button').value = '+';
+
+    }else{
+        display = 'inline';
+        document.getElementById('settings-button').value = '-';
+    }
+
+    for(var id in upgrades){
+        document.getElementById('hotkey-' + upgrades[id][0]).style.display = display;
+    }
+    document.getElementById('hotkey-click').style.display = display;
+    document.getElementById('settings-div').style.display = display;
+}
+
 var keyclick_ready = 1;
 var upgrade_base = 2;
 var upgrades = [
-  ['manual', 0, 'A', 'per-click'],
-  ['script', 1, 'R', 'per-second'],
-  ['employee', 2, 'E', 'per-second'],
-  ['server', 3, 'S', 'per-second'],
-  ['cluster', 4, 'T', 'per-second'],
-  ['investor', 5, 'V', 'multiplier'],
+  ['manual', 0, '1', 'per-click'],
+  ['script', 1, '2', 'per-second'],
+  ['employee', 2, '3', 'per-second'],
+  ['server', 3, '4', 'per-second'],
+  ['cluster', 4, '5', 'per-second'],
+  ['investor', 5, '6', 'multiplier'],
 ];
 
 window.onbeforeunload = function(e){
@@ -259,7 +277,7 @@ window.onload = function(){
             + upgrades[id][1] + ',"'
             + 'clicks-' + upgrades[id][3]
           + '") type=button value=' + upgrades[id][0] + '>'
-          + ' <input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
+          + '<input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
           + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
     }
 
