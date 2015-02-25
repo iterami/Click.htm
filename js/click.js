@@ -156,25 +156,22 @@ window.onbeforeunload = function(e){
       || parseInt(document.getElementById('clicks-per-second').innerHTML) > 0
       || parseInt(document.getElementById('clicks-multiplier').innerHTML) > 100){
         // Save progress into window.localStorage.
-        window.localStorage.setItem(
-          'Click.htm-clicks',
-          document.getElementById('clicks').innerHTML
-        );
-        window.localStorage.setItem(
-          'Click.htm-clicks-multiplier',
-          document.getElementById('clicks-multiplier').innerHTML
-        );
-        window.localStorage.setItem(
-          'Click.htm-clicks-per-click',
-          document.getElementById('clicks-per-click').innerHTML
-        );
-        window.localStorage.setItem(
-          'Click.htm-clicks-per-second',
-          document.getElementById('clicks-per-second').innerHTML
-        );
+        var ids = [
+          'clicks',
+          'clicks-multiplier',
+          'clicks-per-click',
+          'clicks-per-second',
+        ];
+
+        for(var id in ids){
+            window.localStorage.setItem(
+              'Click.htm-' + ids[id],
+              document.getElementById(ids[id]).innerHTML
+            );
+        }
 
         // Save upgrades into window.localStorage.
-        for(var id in upgrades){
+        for(id in upgrades){
             window.localStorage.setItem(
               'Click.htm-upgrade-' + upgrades[id][0],
               document.getElementById('upgrade-' + upgrades[id][0]).innerHTML
@@ -247,18 +244,18 @@ window.onload = function(){
         ? 'C'
         : window.localStorage.getItem('Click.htm-hotkey-click');
 
-    var values = {
+    var ids = {
       'clicks': 0,
       'clicks-multiplier': 100,
       'clicks-per-click': 1,
       'clicks-per-second': 0,
     };
 
-    for(var value in values){
-        document.getElementById(value).innerHTML =
-          window.localStorage.getItem('Click.htm-' + value) === null
-            ? values[value]
-            : window.localStorage.getItem('Click.htm-' + value);
+    for(var id in ids){
+        document.getElementById(id).innerHTML =
+          window.localStorage.getItem('Click.htm-' + id) === null
+            ? ids[id]
+            : window.localStorage.getItem('Click.htm-' + id);
     }
 
     document.getElementById('clicks-per-click-multiplied').innerHTML =
@@ -269,7 +266,7 @@ window.onload = function(){
       Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
       * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
-    for(var id in upgrades){
+    for(id in upgrades){
         document.getElementById('upgrades').innerHTML +=
           '<span id=upgrade-' + upgrades[id][0] + '></span>'
           + ' <input onclick=purchase("'
