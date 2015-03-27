@@ -23,7 +23,7 @@ function purchase(upgrade, cost, target){
     //   ...subtract cost of upgrade from clicks...
     document.getElementById('clicks').innerHTML =
       parseInt(document.getElementById('clicks').innerHTML)
-    - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
+      - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
 
     // ...and increase upgrade...
     document.getElementById('upgrade-' + upgrade).innerHTML =
@@ -267,13 +267,15 @@ window.onload = function(){
       * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
     for(id in upgrades){
+        var upgrade = upgrades[id][0][0].toUpperCase() + upgrades[id][0].substring(1);
+
         document.getElementById('upgrades').innerHTML +=
           '<span id=upgrade-' + upgrades[id][0] + '></span>'
           + ' <input onclick=purchase("'
             + upgrades[id][0] + '",'
             + upgrades[id][1] + ',"'
             + 'clicks-' + upgrades[id][3]
-          + '") type=button value=' + upgrades[id][0] + '>'
+          + '") type=button value=' + upgrade + '>'
           + '<input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
           + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
     }
