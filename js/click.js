@@ -50,7 +50,7 @@ function purchase(upgrade, cost, target){
 }
 
 function reset_score(){
-    if(!confirm('Reset score?')){
+    if(!window.confirm('Reset score?')){
         return;
     }
 
@@ -80,7 +80,7 @@ function reset_score(){
 }
 
 function reset_settings(){
-    if(!confirm('Reset settings?')){
+    if(!window.confirm('Reset settings?')){
         return;
     }
 
