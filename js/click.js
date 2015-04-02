@@ -113,9 +113,7 @@ function second_loop(){
 
 function set_upgrade(upgrade, cost){
     document.getElementById('upgrade-' + upgrade).innerHTML =
-      window.localStorage.getItem('Click.htm-upgrade-' + upgrade) === null
-        ? 0
-        : window.localStorage.getItem('Click.htm-upgrade-' + upgrade);
+      window.localStorage.getItem('Click.htm-upgrade-' + upgrade) || 0;
     
     calculate_upgrade_cost(upgrade, cost);
 }
