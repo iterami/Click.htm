@@ -118,15 +118,18 @@ function set_upgrade(upgrade, cost){
     calculate_upgrade_cost(upgrade, cost);
 }
 
-function settings_toggle(){
-    var display = 'none';
+function settings_toggle(state){
+    state = state == undefined
+      ? document.getElementById('settings-button').value === '+'
+      : state;
+    var display = 'inline';
 
-    if(document.getElementById('settings-button').value === '-'){
-        document.getElementById('settings-button').value = '+';
+    if(state){
+        document.getElementById('settings-button').value = '-';
 
     }else{
-        display = 'inline';
-        document.getElementById('settings-button').value = '-';
+        display = 'none';
+        document.getElementById('settings-button').value = '+';
     }
 
     for(var id in upgrades){
@@ -203,7 +206,20 @@ window.onbeforeunload = function(e){
 };
 
 window.onkeydown = function(e){
-    var key = String.fromCharCode(e.keyCode || e.which);
+    var key = e.keyCode || e.which;
+
+    // +: show settings.
+    if(key === 187){
+        settings_toggle(true);
+        return;
+
+    // -: hide settings.
+    }else if(key === 189){
+        settings_toggle(false);
+        return;
+    }
+
+    key = String.fromCharCode(key);
 
     if(key == document.getElementById('hotkey-click').value){
         if(keyclick_ready > 0){
