@@ -93,7 +93,7 @@ function reset_settings(){
     }
 }
 
-function second_loop(){
+function second(){
     if(parseInt(document.getElementById('clicks-per-second').innerHTML) > 0){
         document.getElementById('clicks').innerHTML =
           parseInt(document.getElementById('clicks').innerHTML)
@@ -105,8 +105,8 @@ function second_loop(){
     document.title = document.getElementById('clicks').innerHTML;
 
     // There is always another second.
-    setTimeout(
-      'second_loop()',
+    window.setTimeout(
+      'second()',
       1000
     );
 }
@@ -306,8 +306,8 @@ window.onload = function(){
         );
     }
 
-    setTimeout(
-      'second_loop()',
+    window.setTimeout(
+      'second()',
       1000
     );
 };
