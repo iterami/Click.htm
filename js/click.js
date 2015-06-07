@@ -217,7 +217,7 @@ window.onbeforeunload = function(e){
 
     // Save upgrade hotkeys, if different from default.
     for(var id in upgrades){
-        if(document.getElementById('hotkey-' + id).value != 'hotkey'){
+        if(document.getElementById('hotkey-' + id).value != upgrades[id]['hotkey']){
             window.localStorage.setItem(
               'Click.htm-hotkey-' + id,
               document.getElementById('hotkey-' + id).value
