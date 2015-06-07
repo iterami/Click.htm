@@ -13,6 +13,9 @@ div{
     vertical-align: top;
     width: auto;
 }
+.hotkey{
+    display: none;
+}
 input{
     background: #000;
     color: #aaa;
@@ -22,6 +25,9 @@ input{
 }
 input[type=button]{
     width: auto;
+}
+#settings-div{
+    display: none;
 }
 #upgrades{
     margin-left: 25px;

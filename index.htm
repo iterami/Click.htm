@@ -5,7 +5,7 @@
 
 <div>
     <b id=clicks></b><br>
-    <input class=click-button onclick=click_button() type=button value=Click><input id=hotkey-click maxlength=1><br>
+    <input class=click-button onclick=click_button() type=button value=Click><input class=hotkey id=hotkey-click maxlength=1><br>
     +<span id=clicks-per-click></span> per click (+<span id=clicks-per-click-multiplied></span>)<br>
     +<span id=clicks-per-second></span> per second (+<span id=clicks-per-second-multiplied></span>)<br>
     <span id=clicks-multiplier></span>% multiplier
@@ -14,7 +14,7 @@
 <div id=upgrades></div>
 
 <br>
-<input id=settings-button onclick=settings_toggle() type=button value=->
+<input id=settings-button onclick=settings_toggle() type=button value=+>
 <div id=settings-div>
     <input onclick=reset_score() type=button value="Reset Score"><input onclick=reset_settings() type=button value="Reset Settings">
 </div>

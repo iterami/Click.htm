@@ -68,13 +68,13 @@ function reset_score(){
     document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
 
     for(var id in upgrades){
-        window.localStorage.removeItem('Click.htm-upgrade-' + upgrades[id][0]);
+        window.localStorage.removeItem('Click.htm-upgrade-' + id);
 
-        document.getElementById('upgrade-' + upgrades[id][0]).innerHTML = 0;
+        document.getElementById('upgrade-' + id).innerHTML = 0;
 
         set_upgrade(
-          upgrades[id][0],
-          upgrades[id][1]
+          id,
+          upgrades[id]['cost']
         );
     }
 }
@@ -88,8 +88,8 @@ function reset_settings(){
     document.getElementById('hotkey-click').value = 'C';
 
     for(var id in upgrades){
-        window.localStorage.removeItem('Click.htm-hotkey-' + upgrades[id][0]);
-        document.getElementById('hotkey-' + upgrades[id][0]).value = upgrades[id][2];
+        window.localStorage.removeItem('Click.htm-hotkey-' + id);
+        document.getElementById('hotkey-' + id).value = upgrades[id]['hotkey'];
     }
 }
 
@@ -133,7 +133,7 @@ function settings_toggle(state){
     }
 
     for(var id in upgrades){
-        document.getElementById('hotkey-' + upgrades[id][0]).style.display = display;
+        document.getElementById('hotkey-' + id).style.display = display;
     }
     document.getElementById('hotkey-click').style.display = display;
     document.getElementById('settings-div').style.display = display;
@@ -141,14 +141,38 @@ function settings_toggle(state){
 
 var keyclick_ready = 1;
 var upgrade_base = 2;
-var upgrades = [
-  ['manual', 0, '1', 'per-click'],
-  ['script', 1, '2', 'per-second'],
-  ['employee', 2, '3', 'per-second'],
-  ['server', 3, '4', 'per-second'],
-  ['cluster', 4, '5', 'per-second'],
-  ['investor', 5, '6', 'multiplier'],
-];
+var upgrades = {
+  'manual': {
+    'cost': 0,
+    'hotkey': '1',
+    'type': 'per-click',
+  },
+  'script': {
+    'cost': 1,
+    'hotkey': '2',
+    'type': 'per-second',
+  },
+  'employee': {
+    'cost': 2,
+    'hotkey': '3',
+    'type': 'per-second',
+  },
+  'server': {
+    'cost': 3,
+    'hotkey': '4',
+    'type': 'per-second',
+  },
+  'cluster': {
+    'cost': 4,
+    'hotkey': '5',
+    'type': 'per-second',
+  },
+  'investor': {
+    'cost': 5,
+    'hotkey': '6',
+    'type': 'multiplier',
+  },
+};
 
 window.onbeforeunload = function(e){
     // If any progress has been made.
@@ -174,8 +198,8 @@ window.onbeforeunload = function(e){
         // Save upgrades into window.localStorage.
         for(id in upgrades){
             window.localStorage.setItem(
-              'Click.htm-upgrade-' + upgrades[id][0],
-              document.getElementById('upgrade-' + upgrades[id][0]).innerHTML
+              'Click.htm-upgrade-' + id,
+              document.getElementById('upgrade-' + id).innerHTML
             );
         }
     }
@@ -193,14 +217,14 @@ window.onbeforeunload = function(e){
 
     // Save upgrade hotkeys, if different from default.
     for(var id in upgrades){
-        if(document.getElementById('hotkey-' + upgrades[id][0]).value != upgrades[id][2]){
+        if(document.getElementById('hotkey-' + id).value != 'hotkey'){
             window.localStorage.setItem(
-              'Click.htm-hotkey-' + upgrades[id][0],
-              document.getElementById('hotkey-' + upgrades[id][0]).value
+              'Click.htm-hotkey-' + id,
+              document.getElementById('hotkey-' + id).value
             );
 
         }else{
-            window.localStorage.removeItem('Click.htm-hotkey-' + upgrades[id][0]);
+            window.localStorage.removeItem('Click.htm-hotkey-' + id);
         }
     }
 };
@@ -231,14 +255,14 @@ window.onkeydown = function(e){
     }
 
     for(var id in upgrades){
-        if(key != document.getElementById('hotkey-' + upgrades[id][0]).value){
+        if(key != document.getElementById('hotkey-' + id).value){
             continue;
         }
 
         purchase(
-          upgrades[id][0],
-          upgrades[id][1],
-          'clicks-' + upgrades[id][3]
+          id,
+          upgrades[id]['cost'],
+          'clicks-' + upgrades[id]['type']
         );
     }
 };
@@ -281,28 +305,28 @@ window.onload = function(){
       * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 
     for(id in upgrades){
-        var upgrade = upgrades[id][0][0].toUpperCase() + upgrades[id][0].substring(1);
+        var upgrade = id[0].toUpperCase() + id.substring(1);
 
         document.getElementById('upgrades').innerHTML +=
-          '<span id=upgrade-' + upgrades[id][0] + '></span>'
+          '<span id=upgrade-' + id + '></span>'
           + ' <input onclick=purchase("'
-            + upgrades[id][0] + '",'
-            + upgrades[id][1] + ',"'
-            + 'clicks-' + upgrades[id][3]
+            + id + '",'
+            + upgrades[id]['cost'] + ',"'
+            + 'clicks-' + upgrades[id]['type']
           + '") type=button value=' + upgrade + '>'
-          + '<input id=hotkey-' + upgrades[id][0] + ' maxlength=1>'
-          + ' <span id=upgrade-' + upgrades[id][0] + '-cost></span><br>';
+          + '<input class=hotkey id=hotkey-' + id + ' maxlength=1>'
+          + ' <span id=upgrade-' + id + '-cost></span><br>';
     }
 
     for(id in upgrades){
-        document.getElementById('hotkey-' + upgrades[id][0]).value =
-          window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]) === null
-            ? upgrades[id][2]
-            : window.localStorage.getItem('Click.htm-hotkey-' + upgrades[id][0]);
+        document.getElementById('hotkey-' + id).value =
+          window.localStorage.getItem('Click.htm-hotkey-' + id) === null
+            ? upgrades[id]['hotkey']
+            : window.localStorage.getItem('Click.htm-hotkey-' + id);
 
         set_upgrade(
-          upgrades[id][0],
-          upgrades[id][1]
+          id,
+          upgrades[id]['cost']
         );
     }
 
