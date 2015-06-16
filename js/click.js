@@ -84,12 +84,12 @@ function reset_settings(){
         return;
     }
 
-    window.localStorage.removeItem('Click.htm-hotkey-click');
-    document.getElementById('hotkey-click').value = 'C';
+    window.localStorage.removeItem('Click.htm-keybind-click');
+    document.getElementById('keybind-click').value = 'C';
 
     for(var id in upgrades){
-        window.localStorage.removeItem('Click.htm-hotkey-' + id);
-        document.getElementById('hotkey-' + id).value = upgrades[id]['hotkey'];
+        window.localStorage.removeItem('Click.htm-keybind-' + id);
+        document.getElementById('keybind-' + id).value = upgrades[id]['keybind'];
     }
 }
 
@@ -133,9 +133,9 @@ function settings_toggle(state){
     }
 
     for(var id in upgrades){
-        document.getElementById('hotkey-' + id).style.display = display;
+        document.getElementById('keybind-' + id).style.display = display;
     }
-    document.getElementById('hotkey-click').style.display = display;
+    document.getElementById('keybind-click').style.display = display;
     document.getElementById('settings-div').style.display = display;
 }
 
@@ -144,32 +144,32 @@ var upgrade_base = 2;
 var upgrades = {
   'manual': {
     'cost': 0,
-    'hotkey': '1',
+    'keybind': '1',
     'type': 'per-click',
   },
   'script': {
     'cost': 1,
-    'hotkey': '2',
+    'keybind': '2',
     'type': 'per-second',
   },
   'employee': {
     'cost': 2,
-    'hotkey': '3',
+    'keybind': '3',
     'type': 'per-second',
   },
   'server': {
     'cost': 3,
-    'hotkey': '4',
+    'keybind': '4',
     'type': 'per-second',
   },
   'cluster': {
     'cost': 4,
-    'hotkey': '5',
+    'keybind': '5',
     'type': 'per-second',
   },
   'investor': {
     'cost': 5,
-    'hotkey': '6',
+    'keybind': '6',
     'type': 'multiplier',
   },
 };
@@ -204,27 +204,27 @@ window.onbeforeunload = function(e){
         }
     }
 
-    // Save click hotkey, if different from default.
-    if(document.getElementById('hotkey-click').value != 'C'){
+    // Save click keybind, if different from default.
+    if(document.getElementById('keybind-click').value != 'C'){
         window.localStorage.setItem(
-          'Click.htm-hotkey-click',
-          document.getElementById('hotkey-click').value
+          'Click.htm-keybind-click',
+          document.getElementById('keybind-click').value
         );
 
     }else{
-        window.localStorage.removeItem('Click.htm-hotkey-click');
+        window.localStorage.removeItem('Click.htm-keybind-click');
     }
 
-    // Save upgrade hotkeys, if different from default.
+    // Save upgrade keybinds, if different from default.
     for(var id in upgrades){
-        if(document.getElementById('hotkey-' + id).value != upgrades[id]['hotkey']){
+        if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
             window.localStorage.setItem(
-              'Click.htm-hotkey-' + id,
-              document.getElementById('hotkey-' + id).value
+              'Click.htm-keybind-' + id,
+              document.getElementById('keybind-' + id).value
             );
 
         }else{
-            window.localStorage.removeItem('Click.htm-hotkey-' + id);
+            window.localStorage.removeItem('Click.htm-keybind-' + id);
         }
     }
 };
@@ -245,7 +245,7 @@ window.onkeydown = function(e){
 
     key = String.fromCharCode(key);
 
-    if(key == document.getElementById('hotkey-click').value){
+    if(key == document.getElementById('keybind-click').value){
         if(keyclick_ready > 0){
             keyclick_ready = 0;
             click_button();
@@ -255,7 +255,7 @@ window.onkeydown = function(e){
     }
 
     for(var id in upgrades){
-        if(key != document.getElementById('hotkey-' + id).value){
+        if(key != document.getElementById('keybind-' + id).value){
             continue;
         }
 
@@ -270,17 +270,17 @@ window.onkeydown = function(e){
 window.onkeyup = function(e){
     var key = String.fromCharCode(e.keyCode || e.which);
 
-    if(key == document.getElementById('hotkey-click').value){
+    if(key == document.getElementById('keybind-click').value){
         keyclick_ready = 1;
     }
 };
 
 window.onload = function(){
     // Load values from window.localStorage, if they exist.
-    document.getElementById('hotkey-click').value =
-      window.localStorage.getItem('Click.htm-hotkey-click') === null
+    document.getElementById('keybind-click').value =
+      window.localStorage.getItem('Click.htm-keybind-click') === null
         ? 'C'
-        : window.localStorage.getItem('Click.htm-hotkey-click');
+        : window.localStorage.getItem('Click.htm-keybind-click');
 
     var ids = {
       'clicks': 0,
@@ -314,15 +314,15 @@ window.onload = function(){
             + upgrades[id]['cost'] + ',"'
             + 'clicks-' + upgrades[id]['type']
           + '") type=button value=' + upgrade + '>'
-          + '<input class=hotkey id=hotkey-' + id + ' maxlength=1>'
+          + '<input class=keybind id=keybind-' + id + ' maxlength=1>'
           + ' <span id=upgrade-' + id + '-cost></span><br>';
     }
 
     for(id in upgrades){
-        document.getElementById('hotkey-' + id).value =
-          window.localStorage.getItem('Click.htm-hotkey-' + id) === null
-            ? upgrades[id]['hotkey']
-            : window.localStorage.getItem('Click.htm-hotkey-' + id);
+        document.getElementById('keybind-' + id).value =
+          window.localStorage.getItem('Click.htm-keybind-' + id) === null
+            ? upgrades[id]['keybind']
+            : window.localStorage.getItem('Click.htm-keybind-' + id);
 
         set_upgrade(
           id,

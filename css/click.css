@@ -13,9 +13,6 @@ div{
     vertical-align: top;
     width: auto;
 }
-.hotkey{
-    display: none;
-}
 input{
     background: #000;
     color: #aaa;
@@ -25,6 +22,9 @@ input{
 }
 input[type=button]{
     width: auto;
+}
+.keybind{
+    display: none;
 }
 #settings-div{
     display: none;
