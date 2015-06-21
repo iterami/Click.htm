@@ -21,6 +21,7 @@ input{
     text-align: center;
 }
 input[type=button]{
+    cursor: pointer;
     width: auto;
 }
 .keybind{
