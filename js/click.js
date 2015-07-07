@@ -1,3 +1,5 @@
+'use strict';
+
 function calculate_upgrade_cost(upgrade, cost){
     document.getElementById('upgrade-' + upgrade + '-cost').innerHTML = Math.pow(
       upgrade_base + cost,
