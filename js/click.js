@@ -247,7 +247,7 @@ window.onkeydown = function(e){
 
     key = String.fromCharCode(key);
 
-    if(key == document.getElementById('keybind-click').value){
+    if(key === document.getElementById('keybind-click').value){
         if(keyclick_ready > 0){
             keyclick_ready = 0;
             click_button();
@@ -272,7 +272,7 @@ window.onkeydown = function(e){
 window.onkeyup = function(e){
     var key = String.fromCharCode(e.keyCode || e.which);
 
-    if(key == document.getElementById('keybind-click').value){
+    if(key === document.getElementById('keybind-click').value){
         keyclick_ready = 1;
     }
 };
