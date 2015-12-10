@@ -16,16 +16,16 @@ function click_button(){
 }
 
 function purchase(upgrade, cost, target){
-    if(parseInt(document.getElementById('clicks').innerHTML)
-      < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
+    var clicks = parseInt(document.getElementById('clicks').innerHTML);
+
+    if(clicks < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
         return;
     }
 
     // If user can afford upgrade...
     //   ...subtract cost of upgrade from clicks...
     document.getElementById('clicks').innerHTML =
-      parseInt(document.getElementById('clicks').innerHTML)
-      - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
+      clicks - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
 
     // ...and increase upgrade...
     document.getElementById('upgrade-' + upgrade).innerHTML =
