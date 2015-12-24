@@ -45,7 +45,6 @@ function purchase(upgrade, cost, target){
     var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100);
     document.getElementById('clicks-per-click-multiplied').innerHTML =
       Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML) * multiplier);
-
     document.getElementById('clicks-per-second-multiplied').innerHTML =
       Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML) * multiplier);
 }
@@ -297,13 +296,11 @@ window.onload = function(){
             : window.localStorage.getItem('Click.htm-' + id);
     }
 
+    var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100);
     document.getElementById('clicks-per-click-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
-
+      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML) * multiplier);
     document.getElementById('clicks-per-second-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML) * multiplier);
 
     for(id in upgrades){
         var upgrade = id[0].toUpperCase() + id.substring(1);
