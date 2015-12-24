@@ -42,13 +42,12 @@ function purchase(upgrade, cost, target){
       );
 
     // ...and recalculate multiplied values.
+    var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100);
     document.getElementById('clicks-per-click-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML) * multiplier);
 
     document.getElementById('clicks-per-second-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML) * multiplier);
 }
 
 function reset_score(){
