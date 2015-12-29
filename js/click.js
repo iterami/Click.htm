@@ -59,15 +59,19 @@ function reset_score(){
     window.localStorage.removeItem('Click.htm-clicks-per-click');
     window.localStorage.removeItem('Click.htm-clicks-per-second');
 
-    document.getElementById('clicks').innerHTML = 0;
-    document.getElementById('clicks-multiplier').innerHTML = 100;
-    document.getElementById('clicks-per-click').innerHTML = 1;
-    document.getElementById('clicks-per-second').innerHTML = 0;
+    var ids = {
+      'clicks': 0,
+      'clicks-multiplier': 100,
+      'clicks-per-click': 1,
+      'clicks-per-click-multiplied': 1,
+      'clicks-per-second': 0,
+      'clicks-per-second-multiplied': 0,
+    };
+    for(var id in ids){
+        document.getElementById(id).value = ids[id];
+    }
 
-    document.getElementById('clicks-per-click-multiplied').innerHTML = 1;
-    document.getElementById('clicks-per-second-multiplied').innerHTML = 0;
-
-    for(var id in upgrades){
+    for(id in upgrades){
         window.localStorage.removeItem('Click.htm-upgrade-' + id);
 
         document.getElementById('upgrade-' + id).innerHTML = 0;
