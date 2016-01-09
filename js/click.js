@@ -54,11 +54,6 @@ function reset_score(){
         return;
     }
 
-    window.localStorage.removeItem('Click.htm-clicks');
-    window.localStorage.removeItem('Click.htm-clicks-multiplier');
-    window.localStorage.removeItem('Click.htm-clicks-per-click');
-    window.localStorage.removeItem('Click.htm-clicks-per-second');
-
     var ids = {
       'clicks': 0,
       'clicks-multiplier': 100,
@@ -68,7 +63,8 @@ function reset_score(){
       'clicks-per-second-multiplied': 0,
     };
     for(var id in ids){
-        document.getElementById(id).value = ids[id];
+        window.localStorage.removeItem('Click.htm-' + id);
+        document.getElementById(id).innerHTML = ids[id];
     }
 
     for(id in upgrades){
