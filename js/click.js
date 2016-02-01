@@ -106,7 +106,7 @@ function second(){
 
     // There is always another second.
     window.setTimeout(
-      'second()',
+      second,
       1000
     );
 }
@@ -329,7 +329,7 @@ window.onload = function(){
     }
 
     window.setTimeout(
-      'second()',
+      second,
       1000
     );
 };
