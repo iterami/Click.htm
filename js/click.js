@@ -1,38 +1,37 @@
 'use strict';
 
-function calculate_upgrade_cost(upgrade, cost){
-    document.getElementById('upgrade-' + upgrade + '-cost').innerHTML = Math.pow(
-      upgrade_base + cost,
-      parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1
-    );
-}
-
 function click_button(){
     // Add clicks-per-click to clicks.
-    document.getElementById('clicks').innerHTML = 
+    document.getElementById('clicks').innerHTML =
       parseInt(document.getElementById('clicks').innerHTML)
       + Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
       * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
 }
 
-function purchase(upgrade, cost, target){
+function purchase(upgrade, cost, target, free){
     var clicks = parseInt(document.getElementById('clicks').innerHTML);
+    free = free || false;
 
-    if(clicks < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
+    if(!free
+      && clicks < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
         return;
     }
 
-    // If user can afford upgrade...
-    //   ...subtract cost of upgrade from clicks...
-    document.getElementById('clicks').innerHTML =
-      clicks - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
+    if(!free){
+        // If user can afford upgrade...
+        //   ...subtract cost of upgrade from clicks...
+        document.getElementById('clicks').innerHTML =
+          clicks - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
+    }
 
     // ...and increase upgrade...
-    document.getElementById('upgrade-' + upgrade).innerHTML =
-      parseInt(document.getElementById('upgrade-' + upgrade).innerHTML) + 1;
+    upgrades[upgrade]['level'] += 1;
+    document.getElementById('upgrade-' + upgrade).innerHTML = upgrades[upgrade]['level'];
 
-    // ...and increase upgrade cost...
-    calculate_upgrade_cost(upgrade, cost);
+    // ...and update upgrade cost...
+    upgrades[upgrade]['cost'] *= upgrades[upgrade]['multiplier'];
+    document.getElementById('upgrade-' + upgrade + '-cost').innerHTML =
+      upgrades[upgrade]['base'] + upgrades[upgrade]['cost'];
 
     // ...and increase target value, either clicks-per-click or clicks-per-second...
     document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
@@ -68,14 +67,16 @@ function reset_score(){
     }
 
     for(id in upgrades){
+        upgrades[id]['cost'] = 1;
+        upgrades[id]['level'] = 0;
+    }
+
+    for(var id in upgrades){
         window.localStorage.removeItem('Click.htm-upgrade-' + id);
 
-        document.getElementById('upgrade-' + id).innerHTML = 0;
-
-        set_upgrade(
-          id,
-          upgrades[id]['cost']
-        );
+        document.getElementById('upgrade-' + id).innerHTML = upgrades[id]['level'];
+        document.getElementById('upgrade-' + id + '-cost').innerHTML =
+          upgrades[id]['base'] + upgrades[id]['cost'];
     }
 }
 
@@ -111,13 +112,6 @@ function second(){
     );
 }
 
-function set_upgrade(upgrade, cost){
-    document.getElementById('upgrade-' + upgrade).innerHTML =
-      window.localStorage.getItem('Click.htm-upgrade-' + upgrade) || 0;
-    
-    calculate_upgrade_cost(upgrade, cost);
-}
-
 function settings_toggle(state){
     state = state == void 0
       ? document.getElementById('settings-button').value === '+'
@@ -140,68 +134,91 @@ function settings_toggle(state){
 }
 
 var keyclick_ready = 1;
-var upgrade_base = 2;
 var upgrades = {
   'manual': {
-    'cost': 0,
+    'base': 9,
+    'cost': 1,
+    'level': 0,
     'keybind': '1',
+    'multiplier': 2,
     'type': 'per-click',
   },
   'script': {
+    'base': 99,
     'cost': 1,
+    'level': 0,
     'keybind': '2',
+    'multiplier': 4,
     'type': 'per-second',
   },
   'employee': {
-    'cost': 2,
+    'base': 249,
+    'cost': 1,
+    'level': 0,
     'keybind': '3',
+    'multiplier': 8,
     'type': 'per-second',
   },
   'server': {
-    'cost': 3,
+    'base': 499,
+    'cost': 1,
+    'level': 0,
     'keybind': '4',
+    'multiplier': 16,
     'type': 'per-second',
   },
   'cluster': {
-    'cost': 4,
+    'base': 999,
+    'cost': 1,
+    'level': 0,
     'keybind': '5',
+    'multiplier': 32,
     'type': 'per-second',
   },
   'investor': {
-    'cost': 5,
+    'base': 99,
+    'cost': 1,
+    'level': 0,
     'keybind': '6',
+    'multiplier': 64,
     'type': 'multiplier',
   },
 };
 
 window.onbeforeunload = function(e){
-    // If any progress has been made.
-    if(parseInt(document.getElementById('clicks').innerHTML) > 0
-      || parseInt(document.getElementById('clicks-per-click').innerHTML) > 1
-      || parseInt(document.getElementById('clicks-per-second').innerHTML) > 0
-      || parseInt(document.getElementById('clicks-multiplier').innerHTML) > 100){
-        // Save progress into window.localStorage.
-        var ids = [
-          'clicks',
-          'clicks-multiplier',
-          'clicks-per-click',
-          'clicks-per-second',
-        ];
+    // Save clicks into window.localStorage.
+    var clicks = parseInt(document.getElementById('clicks').innerHTML);
+    if(clicks > 0){
+        window.localStorage.setItem(
+          'Click.htm-clicks',
+          clicks
+        );
 
-        for(var id in ids){
+    }else{
+        window.localStorage.removeItem('Click.htm-clicks');
+    }
+
+    // Save upgrades into window.localStorage.
+    for(var id in upgrades){
+        // Save upgrade keybinds, if different from default.
+        if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
             window.localStorage.setItem(
-              'Click.htm-' + ids[id],
-              document.getElementById(ids[id]).innerHTML
+              'Click.htm-keybind-' + id,
+              document.getElementById('keybind-' + id).value
             );
+
+        }else{
+            window.localStorage.removeItem('Click.htm-keybind-' + id);
         }
 
-        // Save upgrades into window.localStorage.
-        for(id in upgrades){
+        // Only save level if greater than 0.
+        if(upgrades[id]['level'] > 0){
             window.localStorage.setItem(
               'Click.htm-upgrade-' + id,
-              document.getElementById('upgrade-' + id).innerHTML
+              upgrades[id]['level']
             );
         }
+
     }
 
     // Save click keybind, if different from default.
@@ -213,19 +230,6 @@ window.onbeforeunload = function(e){
 
     }else{
         window.localStorage.removeItem('Click.htm-keybind-click');
-    }
-
-    // Save upgrade keybinds, if different from default.
-    for(var id in upgrades){
-        if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
-            window.localStorage.setItem(
-              'Click.htm-keybind-' + id,
-              document.getElementById('keybind-' + id).value
-            );
-
-        }else{
-            window.localStorage.removeItem('Click.htm-keybind-' + id);
-        }
     }
 };
 
@@ -306,14 +310,14 @@ window.onload = function(){
         var upgrade = id[0].toUpperCase() + id.substring(1);
 
         document.getElementById('upgrades').innerHTML +=
-          '<span id=upgrade-' + id + '></span>'
+          '<span id=upgrade-' + id + '>0</span>'
           + ' <input onclick=purchase("'
             + id + '",'
             + upgrades[id]['cost'] + ',"'
             + 'clicks-' + upgrades[id]['type']
           + '") type=button value=' + upgrade + '>'
           + '<input class=keybind id=keybind-' + id + ' maxlength=1>'
-          + ' <span id=upgrade-' + id + '-cost></span><br>';
+          + ' <span id=upgrade-' + id + '-cost>' + (upgrades[id]['base'] + upgrades[id]['cost']) +'</span><br>';
     }
 
     for(id in upgrades){
@@ -322,10 +326,19 @@ window.onload = function(){
             ? upgrades[id]['keybind']
             : window.localStorage.getItem('Click.htm-keybind-' + id);
 
-        set_upgrade(
-          id,
-          upgrades[id]['cost']
-        );
+        var level = parseInt(window.localStorage.getItem('Click.htm-upgrade-' + id));
+        level = isNaN(level)
+          ? 0
+          : level;
+        while(level > 0){
+            purchase(
+              id,
+              upgrades[id]['cost'],
+              'clicks-' + upgrades[id]['type'],
+              true
+            );
+            level -= 1;
+        }
     }
 
     window.setTimeout(
