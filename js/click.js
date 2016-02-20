@@ -35,10 +35,7 @@ function purchase(upgrade, cost, target, free){
 
     // ...and increase target value, either clicks-per-click or clicks-per-second...
     document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
-      + (cost < 1 || cost > 4
-        ? 1
-        : cost
-      );
+      + upgrades[upgrade]['bonus'];
 
     // ...and recalculate multiplied values.
     var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100);
@@ -137,6 +134,7 @@ var keyclick_ready = 1;
 var upgrades = {
   'manual': {
     'base': 9,
+    'bonus': 1,
     'cost': 1,
     'level': 0,
     'keybind': '1',
@@ -145,6 +143,7 @@ var upgrades = {
   },
   'script': {
     'base': 99,
+    'bonus': 1,
     'cost': 1,
     'level': 0,
     'keybind': '2',
@@ -153,6 +152,7 @@ var upgrades = {
   },
   'employee': {
     'base': 249,
+    'bonus': 2,
     'cost': 1,
     'level': 0,
     'keybind': '3',
@@ -161,6 +161,7 @@ var upgrades = {
   },
   'server': {
     'base': 499,
+    'bonus': 3,
     'cost': 1,
     'level': 0,
     'keybind': '4',
@@ -169,6 +170,7 @@ var upgrades = {
   },
   'cluster': {
     'base': 999,
+    'bonus': 4,
     'cost': 1,
     'level': 0,
     'keybind': '5',
@@ -177,6 +179,7 @@ var upgrades = {
   },
   'investor': {
     'base': 99,
+    'bonus': 1,
     'cost': 1,
     'level': 0,
     'keybind': '6',
