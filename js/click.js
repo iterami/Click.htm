@@ -64,7 +64,7 @@ function reset_score(){
     }
 
     for(id in upgrades){
-        upgrades[id]['cost'] = 1;
+        upgrades[id]['cost'] = upgrades[id]['base'] / 4;
         upgrades[id]['level'] = 0;
     }
 
@@ -133,54 +133,54 @@ function settings_toggle(state){
 var keyclick_ready = 1;
 var upgrades = {
   'manual': {
-    'base': 9,
+    'base': 8,
     'bonus': 1,
-    'cost': 1,
+    'cost': 2,
     'level': 0,
     'keybind': '1',
     'multiplier': 2,
     'type': 'per-click',
   },
   'script': {
-    'base': 99,
+    'base': 80,
     'bonus': 1,
-    'cost': 1,
+    'cost': 20,
     'level': 0,
     'keybind': '2',
     'multiplier': 4,
     'type': 'per-second',
   },
   'employee': {
-    'base': 249,
+    'base': 200,
     'bonus': 2,
-    'cost': 1,
+    'cost': 50,
     'level': 0,
     'keybind': '3',
     'multiplier': 8,
     'type': 'per-second',
   },
   'server': {
-    'base': 499,
+    'base': 400,
     'bonus': 3,
-    'cost': 1,
+    'cost': 100,
     'level': 0,
     'keybind': '4',
     'multiplier': 16,
     'type': 'per-second',
   },
   'cluster': {
-    'base': 999,
+    'base': 800,
     'bonus': 4,
-    'cost': 1,
+    'cost': 200,
     'level': 0,
     'keybind': '5',
     'multiplier': 32,
     'type': 'per-second',
   },
   'investor': {
-    'base': 99,
+    'base': 80,
     'bonus': 1,
-    'cost': 1,
+    'cost': 20,
     'level': 0,
     'keybind': '6',
     'multiplier': 64,
