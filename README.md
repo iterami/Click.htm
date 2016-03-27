@@ -1,5 +1,5 @@
-Click.htm
----------
+iterami/Click.htm
+-----------------
 
 Click is a simple JavaScript-based idling game. Click the button, purchase upgrades, and see what highscores you can set! Progress is saved in localStorage.
 
