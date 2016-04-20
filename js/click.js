@@ -3,17 +3,20 @@
 function click_button(){
     // Add clicks-per-click to clicks.
     document.getElementById('clicks').innerHTML =
-      parseInt(document.getElementById('clicks').innerHTML)
-      + Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML)
-      * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+      parseInt(document.getElementById('clicks').innerHTML, 10)
+       + Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML, 10)
+       * (parseInt(document.getElementById('clicks-multiplier').innerHTML, 10) / 100));
 }
 
 function purchase(upgrade, cost, target, free){
-    var clicks = parseInt(document.getElementById('clicks').innerHTML);
+    var clicks = parseInt(
+      document.getElementById('clicks').innerHTML,
+      10
+    );
     free = free || false;
 
     if(!free
-      && clicks < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML)){
+      && clicks < parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML, 10)){
         return;
     }
 
@@ -21,7 +24,7 @@ function purchase(upgrade, cost, target, free){
         // If user can afford upgrade...
         //   ...subtract cost of upgrade from clicks...
         document.getElementById('clicks').innerHTML =
-          clicks - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML);
+          clicks - parseInt(document.getElementById('upgrade-' + upgrade + '-cost').innerHTML, 10);
     }
 
     // ...and increase upgrade...
@@ -34,15 +37,17 @@ function purchase(upgrade, cost, target, free){
       upgrades[upgrade]['base'] + upgrades[upgrade]['cost'];
 
     // ...and increase target value, either clicks-per-click or clicks-per-second...
-    document.getElementById(target).innerHTML = parseInt(document.getElementById(target).innerHTML)
-      + upgrades[upgrade]['bonus'];
+    document.getElementById(target).innerHTML = parseInt(
+      document.getElementById(target).innerHTML,
+      10
+    ) + upgrades[upgrade]['bonus'];
 
     // ...and recalculate multiplied values.
-    var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100);
+    var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML, 10) / 100);
     document.getElementById('clicks-per-click-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML) * multiplier);
+      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML, 10) * multiplier);
     document.getElementById('clicks-per-second-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML) * multiplier);
+      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) * multiplier);
 }
 
 function reset_score(){
@@ -92,11 +97,11 @@ function reset_settings(){
 }
 
 function second(){
-    if(parseInt(document.getElementById('clicks-per-second').innerHTML) > 0){
+    if(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) > 0){
         document.getElementById('clicks').innerHTML =
-          parseInt(document.getElementById('clicks').innerHTML)
-        + Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML)
-          * (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100));
+          parseInt(document.getElementById('clicks').innerHTML, 10)
+        + Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10)
+          * (parseInt(document.getElementById('clicks-multiplier').innerHTML, 10) / 100));
     }
 
     // Setting the title to # of clicks makes idling easier.
@@ -190,7 +195,10 @@ var upgrades = {
 
 window.onbeforeunload = function(e){
     // Save clicks into window.localStorage.
-    var clicks = parseInt(document.getElementById('clicks').innerHTML);
+    var clicks = parseInt(
+      document.getElementById('clicks').innerHTML,
+      10
+    );
     if(clicks > 0){
         window.localStorage.setItem(
           'Click.htm-clicks',
@@ -303,11 +311,11 @@ window.onload = function(){
             : window.localStorage.getItem('Click.htm-' + id);
     }
 
-    var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML) / 100);
+    var multiplier = (parseInt(document.getElementById('clicks-multiplier').innerHTML, 10) / 100);
     document.getElementById('clicks-per-click-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML) * multiplier);
+      Math.floor(parseInt(document.getElementById('clicks-per-click').innerHTML, 10) * multiplier);
     document.getElementById('clicks-per-second-multiplied').innerHTML =
-      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML) * multiplier);
+      Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) * multiplier);
 
     for(id in upgrades){
         var upgrade = id[0].toUpperCase() + id.substring(1);
@@ -329,7 +337,10 @@ window.onload = function(){
             ? upgrades[id]['keybind']
             : window.localStorage.getItem('Click.htm-keybind-' + id);
 
-        var level = parseInt(window.localStorage.getItem('Click.htm-upgrade-' + id));
+        var level = parseInt(
+          window.localStorage.getItem('Click.htm-upgrade-' + id),
+          10
+        );
         level = isNaN(level)
           ? 0
           : level;
