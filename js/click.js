@@ -50,8 +50,8 @@ function purchase(upgrade, cost, target, free){
       Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) * multiplier);
 }
 
-function reset_score(){
-    if(!window.confirm('Reset score?')){
+function reset_progress(){
+    if(!window.confirm('Reset progress?')){
         return;
     }
 
