@@ -16,3 +16,8 @@ Upgrade Investor | 5
 Upgrade Manual   | 0
 Upgrade Script   | 1
 Upgrade Server   | 3
+
+---
+
+Requires:
+* [iterami/common](https://github.com/iterami/common)

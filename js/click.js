@@ -355,6 +355,8 @@ window.onload = function(){
         }
     }
 
+    settings_toggle(false);
+
     window.setTimeout(
       second,
       1000
