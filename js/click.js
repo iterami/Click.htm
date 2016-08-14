@@ -341,9 +341,9 @@ window.onload = function(){
           window.localStorage.getItem('Click.htm-upgrade-' + id),
           10
         );
-        level = isNaN(level)
-          ? 0
-          : level;
+        if(isNaN(level)){
+            continue;
+        }
         while(level > 0){
             purchase(
               id,
