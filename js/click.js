@@ -360,7 +360,9 @@ window.onload = function(){
     document.getElementById('click-button').onclick = click_button;
     document.getElementById('reset-progress').onclick = reset_progress;
     document.getElementById('reset-settings').onclick = reset_settings;
-    document.getElementById('settings-button').onclick = settings_toggle;
+    document.getElementById('settings-button').onclick = function(){
+        settings_toggle();
+    };
 
     window.setTimeout(
       second,
