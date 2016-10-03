@@ -5,15 +5,15 @@
 
 <div class="inline right">
     <b id=clicks></b><br>
-    <input class=click-button onclick=click_button() type=button value=Click><input class=keybind id=keybind-click maxlength=1><br>
+    <input id=click-button type=button value=Click><input class=keybind id=keybind-click maxlength=1><br>
     +<span id=clicks-per-click></span> per click (+<span id=clicks-per-click-multiplied></span>)<br>
     +<span id=clicks-per-second></span> per second (+<span id=clicks-per-second-multiplied></span>)<br>
     <span id=clicks-multiplier></span>% multiplier
 </div>
 <div class="inline left" id=upgrades></div><br>
-<input id=settings-button onclick=settings_toggle() type=button value=+>
+<input id=settings-button type=button value=+>
 <div id=settings-div>
-    <input onclick=reset_progress() type=button value="Reset Progress"><input onclick=reset_settings() type=button value="Reset Settings">
+    <input id=reset-progress type=button value="Reset Progress"><input id=reset-settings type=button value="Reset Settings">
 </div>
 
 <script src=js/click.js></script>
