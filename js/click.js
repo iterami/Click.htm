@@ -193,103 +193,6 @@ var upgrades = {
   },
 };
 
-window.onbeforeunload = function(e){
-    // Save clicks into window.localStorage.
-    var clicks = parseInt(
-      document.getElementById('clicks').innerHTML,
-      10
-    );
-    if(clicks > 0){
-        window.localStorage.setItem(
-          'Click.htm-clicks',
-          clicks
-        );
-
-    }else{
-        window.localStorage.removeItem('Click.htm-clicks');
-    }
-
-    // Save upgrades into window.localStorage.
-    for(var id in upgrades){
-        // Save upgrade keybinds, if different from default.
-        if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
-            window.localStorage.setItem(
-              'Click.htm-keybind-' + id,
-              document.getElementById('keybind-' + id).value
-            );
-
-        }else{
-            window.localStorage.removeItem('Click.htm-keybind-' + id);
-        }
-
-        // Only save level if greater than 0.
-        if(upgrades[id]['level'] > 0){
-            window.localStorage.setItem(
-              'Click.htm-upgrade-' + id,
-              upgrades[id]['level']
-            );
-        }
-
-    }
-
-    // Save click keybind, if different from default.
-    if(document.getElementById('keybind-click').value != 'C'){
-        window.localStorage.setItem(
-          'Click.htm-keybind-click',
-          document.getElementById('keybind-click').value
-        );
-
-    }else{
-        window.localStorage.removeItem('Click.htm-keybind-click');
-    }
-};
-
-window.onkeydown = function(e){
-    var key = e.keyCode || e.which;
-
-    // +: show settings.
-    if(key === 187){
-        settings_toggle(true);
-        return;
-
-    // -: hide settings.
-    }else if(key === 189){
-        settings_toggle(false);
-        return;
-    }
-
-    key = String.fromCharCode(key);
-
-    if(key === document.getElementById('keybind-click').value){
-        if(keyclick_ready > 0){
-            keyclick_ready = 0;
-            click_button();
-        }
-
-        return;
-    }
-
-    for(var id in upgrades){
-        if(key != document.getElementById('keybind-' + id).value){
-            continue;
-        }
-
-        purchase(
-          id,
-          upgrades[id]['cost'],
-          'clicks-' + upgrades[id]['type']
-        );
-    }
-};
-
-window.onkeyup = function(e){
-    var key = String.fromCharCode(e.keyCode || e.which);
-
-    if(key === document.getElementById('keybind-click').value){
-        keyclick_ready = 1;
-    }
-};
-
 window.onload = function(){
     // Load values from window.localStorage, if they exist.
     document.getElementById('keybind-click').value =
@@ -368,4 +271,101 @@ window.onload = function(){
       second,
       1000
     );
+
+    window.onbeforeunload = function(e){
+        // Save clicks into window.localStorage.
+        var clicks = parseInt(
+          document.getElementById('clicks').innerHTML,
+          10
+        );
+        if(clicks > 0){
+            window.localStorage.setItem(
+              'Click.htm-clicks',
+              clicks
+            );
+
+        }else{
+            window.localStorage.removeItem('Click.htm-clicks');
+        }
+
+        // Save upgrades into window.localStorage.
+        for(var id in upgrades){
+            // Save upgrade keybinds, if different from default.
+            if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
+                window.localStorage.setItem(
+                  'Click.htm-keybind-' + id,
+                  document.getElementById('keybind-' + id).value
+                );
+
+            }else{
+                window.localStorage.removeItem('Click.htm-keybind-' + id);
+            }
+
+            // Only save level if greater than 0.
+            if(upgrades[id]['level'] > 0){
+                window.localStorage.setItem(
+                  'Click.htm-upgrade-' + id,
+                  upgrades[id]['level']
+                );
+            }
+
+        }
+
+        // Save click keybind, if different from default.
+        if(document.getElementById('keybind-click').value != 'C'){
+            window.localStorage.setItem(
+              'Click.htm-keybind-click',
+              document.getElementById('keybind-click').value
+            );
+
+        }else{
+            window.localStorage.removeItem('Click.htm-keybind-click');
+        }
+    };
+
+    window.onkeydown = function(e){
+        var key = e.keyCode || e.which;
+
+        // +: show settings.
+        if(key === 187){
+            settings_toggle(true);
+            return;
+
+        // -: hide settings.
+        }else if(key === 189){
+            settings_toggle(false);
+            return;
+        }
+
+        key = String.fromCharCode(key);
+
+        if(key === document.getElementById('keybind-click').value){
+            if(keyclick_ready > 0){
+                keyclick_ready = 0;
+                click_button();
+            }
+
+            return;
+        }
+
+        for(var id in upgrades){
+            if(key != document.getElementById('keybind-' + id).value){
+                continue;
+            }
+
+            purchase(
+              id,
+              upgrades[id]['cost'],
+              'clicks-' + upgrades[id]['type']
+            );
+        }
+    };
+
+    window.onkeyup = function(e){
+        var key = String.fromCharCode(e.keyCode || e.which);
+
+        if(key === document.getElementById('keybind-click').value){
+            keyclick_ready = 1;
+        }
+    };
 };
