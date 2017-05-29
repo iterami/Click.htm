@@ -50,150 +50,7 @@ function purchase(upgrade, cost, target, free){
       Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) * multiplier);
 }
 
-function reset_progress(){
-    if(!window.confirm('Reset progress?')){
-        return;
-    }
-
-    var ids = {
-      'clicks': 0,
-      'clicks-multiplier': 100,
-      'clicks-per-click': 1,
-      'clicks-per-click-multiplied': 1,
-      'clicks-per-second': 0,
-      'clicks-per-second-multiplied': 0,
-    };
-    for(var id in ids){
-        window.localStorage.removeItem('Click.htm-' + id);
-        document.getElementById(id).innerHTML = ids[id];
-    }
-
-    for(id in upgrades){
-        upgrades[id]['cost'] = upgrades[id]['base'] / 4;
-        upgrades[id]['level'] = 0;
-    }
-
-    for(var id in upgrades){
-        window.localStorage.removeItem('Click.htm-upgrade-' + id);
-
-        document.getElementById('upgrade-' + id).innerHTML = upgrades[id]['level'];
-        document.getElementById('upgrade-' + id + '-cost').innerHTML =
-          upgrades[id]['base'] + upgrades[id]['cost'];
-    }
-}
-
-function reset_settings(){
-    if(!window.confirm('Reset settings?')){
-        return;
-    }
-
-    window.localStorage.removeItem('Click.htm-keybind-click');
-    document.getElementById('keybind-click').value = 'C';
-
-    for(var id in upgrades){
-        window.localStorage.removeItem('Click.htm-keybind-' + id);
-        document.getElementById('keybind-' + id).value = upgrades[id]['keybind'];
-    }
-}
-
-function second(){
-    if(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) > 0){
-        document.getElementById('clicks').innerHTML =
-          parseInt(document.getElementById('clicks').innerHTML, 10)
-        + Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10)
-          * (parseInt(document.getElementById('clicks-multiplier').innerHTML, 10) / 100));
-    }
-
-    // Setting the title to # of clicks makes idling easier.
-    document.title = document.getElementById('clicks').innerHTML;
-
-    // There is always another second.
-    window.setTimeout(
-      second,
-      1000
-    );
-}
-
-function settings_toggle(state){
-    state = state == void 0
-      ? document.getElementById('settings-button').value === '+'
-      : state;
-    var display = 'inline';
-
-    if(state){
-        document.getElementById('settings-button').value = '-';
-
-    }else{
-        display = 'none';
-        document.getElementById('settings-button').value = '+';
-    }
-
-    for(var id in upgrades){
-        document.getElementById('keybind-' + id).style.display = display;
-    }
-    document.getElementById('keybind-click').style.display = display;
-    document.getElementById('settings-div').style.display = display;
-}
-
-var keyclick_ready = 1;
-var upgrades = {
-  'manual': {
-    'base': 8,
-    'bonus': 1,
-    'cost': 2,
-    'level': 0,
-    'keybind': '1',
-    'multiplier': 2,
-    'type': 'per-click',
-  },
-  'script': {
-    'base': 80,
-    'bonus': 1,
-    'cost': 20,
-    'level': 0,
-    'keybind': '2',
-    'multiplier': 4,
-    'type': 'per-second',
-  },
-  'employee': {
-    'base': 200,
-    'bonus': 2,
-    'cost': 50,
-    'level': 0,
-    'keybind': '3',
-    'multiplier': 8,
-    'type': 'per-second',
-  },
-  'server': {
-    'base': 400,
-    'bonus': 3,
-    'cost': 100,
-    'level': 0,
-    'keybind': '4',
-    'multiplier': 16,
-    'type': 'per-second',
-  },
-  'cluster': {
-    'base': 800,
-    'bonus': 4,
-    'cost': 200,
-    'level': 0,
-    'keybind': '5',
-    'multiplier': 32,
-    'type': 'per-second',
-  },
-  'investor': {
-    'base': 80,
-    'bonus': 1,
-    'cost': 20,
-    'level': 0,
-    'keybind': '6',
-    'multiplier': 64,
-    'type': 'multiplier',
-  },
-};
-
-window.onload = function(){
+function repo_init(){
     // Load values from window.localStorage, if they exist.
     document.getElementById('keybind-click').value =
       window.localStorage.getItem('Click.htm-keybind-click') === null
@@ -368,4 +225,147 @@ window.onload = function(){
             keyclick_ready = 1;
         }
     };
+}
+
+function reset_progress(){
+    if(!window.confirm('Reset progress?')){
+        return;
+    }
+
+    var ids = {
+      'clicks': 0,
+      'clicks-multiplier': 100,
+      'clicks-per-click': 1,
+      'clicks-per-click-multiplied': 1,
+      'clicks-per-second': 0,
+      'clicks-per-second-multiplied': 0,
+    };
+    for(var id in ids){
+        window.localStorage.removeItem('Click.htm-' + id);
+        document.getElementById(id).innerHTML = ids[id];
+    }
+
+    for(id in upgrades){
+        upgrades[id]['cost'] = upgrades[id]['base'] / 4;
+        upgrades[id]['level'] = 0;
+    }
+
+    for(var id in upgrades){
+        window.localStorage.removeItem('Click.htm-upgrade-' + id);
+
+        document.getElementById('upgrade-' + id).innerHTML = upgrades[id]['level'];
+        document.getElementById('upgrade-' + id + '-cost').innerHTML =
+          upgrades[id]['base'] + upgrades[id]['cost'];
+    }
+}
+
+function reset_settings(){
+    if(!window.confirm('Reset settings?')){
+        return;
+    }
+
+    window.localStorage.removeItem('Click.htm-keybind-click');
+    document.getElementById('keybind-click').value = 'C';
+
+    for(var id in upgrades){
+        window.localStorage.removeItem('Click.htm-keybind-' + id);
+        document.getElementById('keybind-' + id).value = upgrades[id]['keybind'];
+    }
+}
+
+function second(){
+    if(parseInt(document.getElementById('clicks-per-second').innerHTML, 10) > 0){
+        document.getElementById('clicks').innerHTML =
+          parseInt(document.getElementById('clicks').innerHTML, 10)
+        + Math.floor(parseInt(document.getElementById('clicks-per-second').innerHTML, 10)
+          * (parseInt(document.getElementById('clicks-multiplier').innerHTML, 10) / 100));
+    }
+
+    // Setting the title to # of clicks makes idling easier.
+    document.title = document.getElementById('clicks').innerHTML;
+
+    // There is always another second.
+    window.setTimeout(
+      second,
+      1000
+    );
+}
+
+function settings_toggle(state){
+    state = state == void 0
+      ? document.getElementById('settings-button').value === '+'
+      : state;
+    var display = 'inline';
+
+    if(state){
+        document.getElementById('settings-button').value = '-';
+
+    }else{
+        display = 'none';
+        document.getElementById('settings-button').value = '+';
+    }
+
+    for(var id in upgrades){
+        document.getElementById('keybind-' + id).style.display = display;
+    }
+    document.getElementById('keybind-click').style.display = display;
+    document.getElementById('settings-div').style.display = display;
+}
+
+var keyclick_ready = 1;
+var upgrades = {
+  'manual': {
+    'base': 8,
+    'bonus': 1,
+    'cost': 2,
+    'level': 0,
+    'keybind': '1',
+    'multiplier': 2,
+    'type': 'per-click',
+  },
+  'script': {
+    'base': 80,
+    'bonus': 1,
+    'cost': 20,
+    'level': 0,
+    'keybind': '2',
+    'multiplier': 4,
+    'type': 'per-second',
+  },
+  'employee': {
+    'base': 200,
+    'bonus': 2,
+    'cost': 50,
+    'level': 0,
+    'keybind': '3',
+    'multiplier': 8,
+    'type': 'per-second',
+  },
+  'server': {
+    'base': 400,
+    'bonus': 3,
+    'cost': 100,
+    'level': 0,
+    'keybind': '4',
+    'multiplier': 16,
+    'type': 'per-second',
+  },
+  'cluster': {
+    'base': 800,
+    'bonus': 4,
+    'cost': 200,
+    'level': 0,
+    'keybind': '5',
+    'multiplier': 32,
+    'type': 'per-second',
+  },
+  'investor': {
+    'base': 80,
+    'bonus': 1,
+    'cost': 20,
+    'level': 0,
+    'keybind': '6',
+    'multiplier': 64,
+    'type': 'multiplier',
+  },
 };
