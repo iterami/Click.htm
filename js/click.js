@@ -51,6 +51,61 @@ function purchase(upgrade, cost, target, free){
 }
 
 function repo_init(){
+    core_input_binds_add({
+      'beforeunload': {
+        'todo': function(){
+            // Save clicks into window.localStorage.
+            var clicks = parseInt(
+              document.getElementById('clicks').innerHTML,
+              10
+            );
+            if(clicks > 0){
+                window.localStorage.setItem(
+                  'Click.htm-clicks',
+                  clicks
+                );
+
+            }else{
+                window.localStorage.removeItem('Click.htm-clicks');
+            }
+
+            // Save upgrades into window.localStorage.
+            for(var id in upgrades){
+                // Save upgrade keybinds, if different from default.
+                if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
+                    window.localStorage.setItem(
+                      'Click.htm-keybind-' + id,
+                      document.getElementById('keybind-' + id).value
+                    );
+
+                }else{
+                    window.localStorage.removeItem('Click.htm-keybind-' + id);
+                }
+
+                // Only save level if greater than 0.
+                if(upgrades[id]['level'] > 0){
+                    window.localStorage.setItem(
+                      'Click.htm-upgrade-' + id,
+                      upgrades[id]['level']
+                    );
+                }
+
+            }
+
+            // Save click keybind, if different from default.
+            if(document.getElementById('keybind-click').value != 'C'){
+                window.localStorage.setItem(
+                  'Click.htm-keybind-click',
+                  document.getElementById('keybind-click').value
+                );
+
+            }else{
+                window.localStorage.removeItem('Click.htm-keybind-click');
+            }
+        },
+      },
+    });
+
     // Load values from window.localStorage, if they exist.
     document.getElementById('keybind-click').value =
       window.localStorage.getItem('Click.htm-keybind-click') === null
@@ -128,57 +183,6 @@ function repo_init(){
       second,
       1000
     );
-
-    window.onbeforeunload = function(e){
-        // Save clicks into window.localStorage.
-        var clicks = parseInt(
-          document.getElementById('clicks').innerHTML,
-          10
-        );
-        if(clicks > 0){
-            window.localStorage.setItem(
-              'Click.htm-clicks',
-              clicks
-            );
-
-        }else{
-            window.localStorage.removeItem('Click.htm-clicks');
-        }
-
-        // Save upgrades into window.localStorage.
-        for(var id in upgrades){
-            // Save upgrade keybinds, if different from default.
-            if(document.getElementById('keybind-' + id).value != upgrades[id]['keybind']){
-                window.localStorage.setItem(
-                  'Click.htm-keybind-' + id,
-                  document.getElementById('keybind-' + id).value
-                );
-
-            }else{
-                window.localStorage.removeItem('Click.htm-keybind-' + id);
-            }
-
-            // Only save level if greater than 0.
-            if(upgrades[id]['level'] > 0){
-                window.localStorage.setItem(
-                  'Click.htm-upgrade-' + id,
-                  upgrades[id]['level']
-                );
-            }
-
-        }
-
-        // Save click keybind, if different from default.
-        if(document.getElementById('keybind-click').value != 'C'){
-            window.localStorage.setItem(
-              'Click.htm-keybind-click',
-              document.getElementById('keybind-click').value
-            );
-
-        }else{
-            window.localStorage.removeItem('Click.htm-keybind-click');
-        }
-    };
 
     window.onkeydown = function(e){
         var key = e.keyCode || e.which;
