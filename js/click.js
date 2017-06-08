@@ -51,6 +51,9 @@ function purchase(upgrade, cost, target, free){
 }
 
 function repo_init(){
+    core_repo_init({
+      'title': 'Click.htm',
+    });
     core_events_bind({
       'beforeunload': {
         'todo': function(){
