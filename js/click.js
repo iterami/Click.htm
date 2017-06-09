@@ -52,9 +52,6 @@ function purchase(upgrade, cost, target, free){
 
 function repo_init(){
     core_repo_init({
-      'title': 'Click.htm',
-    });
-    core_events_bind({
       'beforeunload': {
         'todo': function(){
             // Save clicks into window.localStorage.
@@ -107,6 +104,7 @@ function repo_init(){
             }
         },
       },
+      'title': 'Click.htm',
     });
 
     // Load values from window.localStorage, if they exist.
