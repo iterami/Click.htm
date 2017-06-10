@@ -66,14 +66,14 @@ function repo_init(){
             + core_storage_data['upgrade-' + id + '-cost'] + ',"'
             + 'clicks-' + upgrades[id]['type']
           + '") type=button value=' + upgrade + '>'
-          + ' <span id=upgrade-' + id + '-cost>' + (upgrades[id]['base'] + core_storage_data['upgrade-' + id + '-cost']) +'</span><br>';
+          + ' <span id=upgrade-' + id + '-cost>' + (upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost']) +'</span><br>';
     }
 
     for(id in upgrades){
         var storage = {};
 
         storage['upgrade-' + id] = 0;
-        storage['upgrade-' + id + '-cost'] = upgrades[id]['base'];
+        storage['upgrade-' + id + '-cost'] = upgrades[id]['cost'];
 
         core_storage_add({
           'storage': storage,
@@ -85,7 +85,7 @@ function repo_init(){
         if(core_storage_reset()){
             for(var id in upgrades){
                 core_storage_data['upgrade-' + id] = 0;
-                core_storage_data['upgrade-' + id + '-cost'] = upgrades[id]['base'];
+                core_storage_data['upgrade-' + id + '-cost'] = upgrades[id]['cost'];
             }
         }
     }
@@ -116,38 +116,38 @@ function second(){
 var keyclick_ready = 1;
 var upgrades = {
   'manual': {
-    'base': 2,
     'bonus': 1,
+    'cost': 2,
     'multiplier': 2,
     'type': 'per-click',
   },
   'script': {
-    'base': 20,
     'bonus': 1,
+    'cost': 20,
     'multiplier': 4,
     'type': 'per-second',
   },
   'employee': {
-    'base': 50,
     'bonus': 2,
+    'cost': 50,
     'multiplier': 8,
     'type': 'per-second',
   },
   'server': {
-    'base': 100,
     'bonus': 3,
+    'cost': 100,
     'multiplier': 16,
     'type': 'per-second',
   },
   'cluster': {
-    'base': 200,
     'bonus': 4,
+    'cost': 200,
     'multiplier': 32,
     'type': 'per-second',
   },
   'investor': {
-    'base': 100,
     'bonus': 1,
+    'cost': 20,
     'multiplier': 64,
     'type': 'multiplier',
   },
