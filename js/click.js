@@ -78,17 +78,6 @@ function repo_init(){
         core_storage_add({
           'storage': storage,
         });
-
-        var level = core_storage_data['upgrade-' + id];
-        while(level > 0){
-            purchase(
-              id,
-              core_storage_data['upgrade-' + id + '-cost'],
-              'clicks-' + upgrades[id]['type'],
-              true
-            );
-            level -= 1;
-        }
     }
 
     document.getElementById('click-button').onclick = click_button;
