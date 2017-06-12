@@ -38,9 +38,6 @@ function purchase(upgrade, cost, target, free){
 
 function repo_init(){
     core_repo_init({
-      'beforeunload': {
-        'todo': core_storage_save,
-      },
       'storage': {
         'clicks': 0,
         'clicks-multiplier': 100,
