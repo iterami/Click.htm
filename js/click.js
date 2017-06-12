@@ -78,14 +78,6 @@ function repo_init(){
     }
 
     document.getElementById('click-button').onclick = click_button;
-    document.getElementById('reset-button').onclick = function(){
-        if(core_storage_reset()){
-            for(var id in upgrades){
-                core_storage_data['upgrade-' + id] = 0;
-                core_storage_data['upgrade-' + id + '-cost'] = upgrades[id]['cost'];
-            }
-        }
-    }
 
     window.setTimeout(
       second,
