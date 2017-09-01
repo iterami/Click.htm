@@ -58,11 +58,7 @@ function repo_init(){
 
         document.getElementById('upgrades').innerHTML +=
           '<span id=upgrade-' + id + '>0</span>'
-          + ' <input onclick=purchase("'
-            + id + '",'
-            + core_storage_data['upgrade-' + id + '-cost'] + ',"'
-            + 'clicks-' + upgrades[id]['type']
-          + '") type=button value=' + upgrade + '>'
+          + ' <input id=' + id + ' type=button value=' + upgrade + '>'
           + ' <span id=upgrade-' + id + '-cost>' + (upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost']) +'</span><br>';
     }
 
@@ -75,6 +71,14 @@ function repo_init(){
         core_storage_add({
           'storage': storage,
         });
+
+        document.getElementById(id).onclick = function(){
+            purchase(
+              this.id,
+              core_storage_data['upgrade-' + this.id + '-cost'],
+              'clicks-' + upgrades[this.id]['type']
+            );
+        };
     }
 
     document.getElementById('click-button').onclick = click_button;
