@@ -16,8 +16,7 @@ function purchase(upgrade, cost, target, free){
     }
 
     if(!free){
-        // If user can afford upgrade...
-        //   ...subtract cost of upgrade from clicks...
+        // If user can afford upgrade, subtract cost of upgrade from clicks...
         core_storage_data['clicks'] -= core_storage_data['upgrade-' + upgrade + '-cost'];
     }
 
@@ -92,7 +91,7 @@ function repo_init(){
 }
 
 function second(){
-    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-second']* (core_storage_data['clicks-multiplier'] / 100));
+    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-second'] * (core_storage_data['clicks-multiplier'] / 100));
 
     core_storage_update();
 
