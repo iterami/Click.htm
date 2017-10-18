@@ -2,6 +2,11 @@
 
 function repo_init(){
     core_repo_init({
+      'info-events': {
+        'click-button': {
+          'todo': click_button,
+        },
+      },
       'storage': {
         'clicks': 0,
         'clicks-multiplier': 100,
@@ -44,8 +49,6 @@ function repo_init(){
             );
         };
     }
-
-    document.getElementById('click-button').onclick = click_button;
 
     window.setTimeout(
       second,
