@@ -2,6 +2,47 @@
 
 function repo_init(){
     core_repo_init({
+      'globals': {
+        'keyclick_ready': 1,
+        'upgrades': {
+          'manual': {
+            'bonus': 1,
+            'cost': 2,
+            'multiplier': 2,
+            'type': 'per-click',
+          },
+          'script': {
+            'bonus': 1,
+            'cost': 20,
+            'multiplier': 4,
+            'type': 'per-second',
+          },
+          'employee': {
+            'bonus': 2,
+            'cost': 50,
+            'multiplier': 8,
+            'type': 'per-second',
+          },
+          'server': {
+            'bonus': 3,
+            'cost': 100,
+            'multiplier': 16,
+            'type': 'per-second',
+          },
+          'cluster': {
+            'bonus': 4,
+            'cost': 200,
+            'multiplier': 32,
+            'type': 'per-second',
+          },
+          'investor': {
+            'bonus': 1,
+            'cost': 20,
+            'multiplier': 64,
+            'type': 'multiplier',
+          },
+        },
+      },
       'info-events': {
         'click-button': {
           'todo': click_button,
