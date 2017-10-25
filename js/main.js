@@ -2,6 +2,11 @@
 
 function repo_init(){
     core_repo_init({
+      'events': {
+        'click-button': {
+          'onclick': click_button,
+        },
+      },
       'globals': {
         'keyclick_ready': 1,
         'upgrades': {
@@ -41,11 +46,6 @@ function repo_init(){
             'multiplier': 64,
             'type': 'multiplier',
           },
-        },
-      },
-      'info-events': {
-        'click-button': {
-          'todo': click_button,
         },
       },
       'storage': {
