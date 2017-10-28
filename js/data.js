@@ -42,10 +42,4 @@ function second(){
 
     // Setting the title to # of clicks makes idling easier.
     document.title = core_storage_data['clicks'];
-
-    // There is always another second.
-    window.setTimeout(
-      second,
-      1000
-    );
 }

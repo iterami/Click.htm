@@ -91,10 +91,10 @@ function repo_init(){
         };
     }
 
-    window.setTimeout(
-      second,
-      1000
-    );
+    core_interval_modify({
+      'interval': 1000,
+      'todo': second,
+    });
 
     core_storage_update();
 }
