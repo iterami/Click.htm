@@ -63,7 +63,7 @@ function repo_init(){
     core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * multiplier);
     core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * multiplier);
 
-    for(var id in upgrades){
+    for(let id in upgrades){
         let upgrade = id[0].toUpperCase() + id.substring(1);
 
         document.getElementById('upgrades').innerHTML +=
@@ -72,7 +72,7 @@ function repo_init(){
           + ' <span id=upgrade-' + id + '-cost>' + (upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost']) +'</span><br>';
     }
 
-    for(id in upgrades){
+    for(let id in upgrades){
         let storage = {};
 
         storage['upgrade-' + id] = 0;
