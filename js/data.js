@@ -28,7 +28,7 @@ function purchase(upgrade, cost, target, free){
     core_storage_data[target] += upgrades[upgrade]['bonus'];
 
     // ...and recalculate multiplied values.
-    var multiplier = (core_storage_data['clicks-multiplier'] / 100);
+    let multiplier = (core_storage_data['clicks-multiplier'] / 100);
     core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * multiplier);
     core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * multiplier);
 

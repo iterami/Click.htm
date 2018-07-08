@@ -59,12 +59,12 @@ function repo_init(){
       'title': 'Click.htm',
     });
 
-    var multiplier = (core_storage_data['clicks-multiplier'] / 100);
+    let multiplier = (core_storage_data['clicks-multiplier'] / 100);
     core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * multiplier);
     core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * multiplier);
 
     for(var id in upgrades){
-        var upgrade = id[0].toUpperCase() + id.substring(1);
+        let upgrade = id[0].toUpperCase() + id.substring(1);
 
         document.getElementById('upgrades').innerHTML +=
           '<span id=upgrade-' + id + '>0</span>'
@@ -73,7 +73,7 @@ function repo_init(){
     }
 
     for(id in upgrades){
-        var storage = {};
+        let storage = {};
 
         storage['upgrade-' + id] = 0;
         storage['upgrade-' + id + '-cost'] = upgrades[id]['cost'];
