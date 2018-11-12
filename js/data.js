@@ -5,6 +5,9 @@ function click_button(){
     core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-click'] * (core_storage_data['clicks-multiplier'] / 100));
 
     core_storage_update();
+
+    // Force click-button to lose focus.
+    document.getElementById('click-button').blur();
 }
 
 function purchase(upgrade, cost, target, free){
