@@ -38,7 +38,7 @@ function purchase(upgrade, cost, target, free){
 }
 
 function second(){
-    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-second'] * (core_storage_data['multiplier-per-second'] / 100));
+    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second']);
 
     core_storage_update();
 
