@@ -14,54 +14,60 @@ function repo_init(){
             'bonus': 1,
             'cost': 2,
             'multiplier': 2,
-            'type': 'per-click',
+            'target': 'clicks-per-click',
           },
           'script': {
             'bonus': 1,
             'cost': 20,
             'multiplier': 4,
-            'type': 'per-second',
+            'target': 'clicks-per-second',
           },
           'employee': {
             'bonus': 2,
             'cost': 50,
             'multiplier': 8,
-            'type': 'per-second',
+            'target': 'clicks-per-second',
           },
           'server': {
             'bonus': 3,
             'cost': 100,
             'multiplier': 16,
-            'type': 'per-second',
+            'target': 'clicks-per-second',
           },
           'cluster': {
             'bonus': 4,
             'cost': 200,
             'multiplier': 32,
-            'type': 'per-second',
+            'target': 'clicks-per-second',
+          },
+          'coffeemaker': {
+            'bonus': 10,
+            'cost': 20,
+            'multiplier': 64,
+            'target': 'multiplier-per-click',
           },
           'investor': {
             'bonus': 1,
             'cost': 20,
             'multiplier': 64,
-            'type': 'multiplier',
+            'target': 'multiplier-per-second',
           },
         },
       },
       'storage': {
         'clicks': 0,
-        'clicks-multiplier': 100,
         'clicks-per-click': 1,
         'clicks-per-click-multiplied': 1,
         'clicks-per-second': 0,
         'clicks-per-second-multiplied': 0,
+        'multiplier-per-click': 100,
+        'multiplier-per-second': 100,
       },
       'title': 'Click.htm',
     });
 
-    let multiplier = (core_storage_data['clicks-multiplier'] / 100);
-    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * multiplier);
-    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * multiplier);
+    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * (core_storage_data['multiplier-per-click'] / 100));
+    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * (core_storage_data['multiplier-per-second'] / 100));
 
     for(let id in upgrades){
         let upgrade = id[0].toUpperCase() + id.substring(1);
@@ -86,7 +92,7 @@ function repo_init(){
             purchase(
               this.id,
               core_storage_data['upgrade-' + this.id + '-cost'],
-              'clicks-' + upgrades[this.id]['type']
+              upgrades[this.id]['target']
             );
         };
     }
