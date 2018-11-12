@@ -2,7 +2,7 @@
 
 function click_button(){
     // Add clicks-per-click to clicks.
-    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-click'] * (core_storage_data['multiplier-per-click'] / 100));
+    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
 
     core_storage_update();
 
@@ -31,8 +31,8 @@ function purchase(upgrade, cost, target, free){
     core_storage_data[target] += upgrades[upgrade]['bonus'];
 
     // ...and recalculate multiplied values.
-    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * (core_storage_data['multiplier-per-click'] / 100));
-    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * (core_storage_data['multiplier-per-second'] / 100));
+    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
+    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second']);
 
     core_storage_update();
 }

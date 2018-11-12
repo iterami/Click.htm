@@ -41,13 +41,13 @@ function repo_init(){
             'target': 'clicks-per-second',
           },
           'coffeemaker': {
-            'bonus': 10,
+            'bonus': .1,
             'cost': 20,
             'multiplier': 64,
             'target': 'multiplier-per-click',
           },
           'investor': {
-            'bonus': 1,
+            'bonus': .01,
             'cost': 20,
             'multiplier': 64,
             'target': 'multiplier-per-second',
@@ -60,14 +60,14 @@ function repo_init(){
         'clicks-per-click-multiplied': 1,
         'clicks-per-second': 0,
         'clicks-per-second-multiplied': 0,
-        'multiplier-per-click': 100,
-        'multiplier-per-second': 100,
+        'multiplier-per-click': 1,
+        'multiplier-per-second': 1,
       },
       'title': 'Click.htm',
     });
 
-    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * (core_storage_data['multiplier-per-click'] / 100));
-    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * (core_storage_data['multiplier-per-second'] / 100));
+    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
+    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second']);
 
     for(let id in upgrades){
         let upgrade = id[0].toUpperCase() + id.substring(1);
