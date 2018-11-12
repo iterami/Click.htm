@@ -28,7 +28,10 @@ function purchase(upgrade, cost, target, free){
     core_storage_data['upgrade-' + upgrade + '-cost'] *= upgrades[upgrade]['multiplier'];
 
     // ...and increase target value, either clicks-per-click or clicks-per-second...
-    core_storage_data[target] += upgrades[upgrade]['bonus'];
+    core_storage_data[target] = core_round({
+      'decimals': 2,
+      'number': core_storage_data[target] + upgrades[upgrade]['bonus'],
+    });
 
     // ...and recalculate multiplied values.
     core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
