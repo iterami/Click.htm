@@ -2,7 +2,10 @@
 
 function click_button(){
     // Add clicks-per-click to clicks.
-    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
+    core_storage_data['clicks'] = core_round({
+      'decimals': 2,
+      'number': core_storage_data['clicks'] + core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'],
+    });
 
     core_storage_update();
 
@@ -34,14 +37,17 @@ function purchase(upgrade, cost, target, free){
     });
 
     // ...and recalculate multiplied values.
-    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
-    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second']);
+    core_storage_data['clicks-per-click-multiplied'] = core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'];
+    core_storage_data['clicks-per-second-multiplied'] = core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'];
 
     core_storage_update();
 }
 
 function second(){
-    core_storage_data['clicks'] += Math.floor(core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second']);
+    core_storage_data['clicks'] = core_round({
+      'decimals': 2,
+      'number': core_storage_data['clicks'] + core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'],
+    }); Math.floor();
 
     core_storage_update();
 

@@ -66,8 +66,8 @@ function repo_init(){
       'title': 'Click.htm',
     });
 
-    core_storage_data['clicks-per-click-multiplied'] = Math.floor(core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click']);
-    core_storage_data['clicks-per-second-multiplied'] = Math.floor(core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second']);
+    core_storage_data['clicks-per-click-multiplied'] = core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'];
+    core_storage_data['clicks-per-second-multiplied'] = core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'];
 
     for(let id in upgrades){
         let upgrade = id[0].toUpperCase() + id.substring(1);
