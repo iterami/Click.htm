@@ -23,7 +23,10 @@ function purchase(upgrade, cost, target, free){
 
     if(!free){
         // If user can afford upgrade, subtract cost of upgrade from clicks...
-        core_storage_data['clicks'] -= core_storage_data['upgrade-' + upgrade + '-cost'];
+        core_storage_data['clicks'] = core_round({
+          'decimals': 2,
+          'number': core_storage_data['clicks'] - core_storage_data['upgrade-' + upgrade + '-cost'],
+        });
     }
 
     // ...and increase upgrade/cost...
@@ -37,8 +40,14 @@ function purchase(upgrade, cost, target, free){
     });
 
     // ...and recalculate multiplied values.
-    core_storage_data['clicks-per-click-multiplied'] = core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'];
-    core_storage_data['clicks-per-second-multiplied'] = core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'];
+    core_storage_data['clicks-per-click-multiplied'] = core_round({
+      'decimals': 2,
+      'number': core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'],
+    });
+    core_storage_data['clicks-per-second-multiplied'] = core_round({
+      'decimals': 2,
+      'number': core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'],
+    });
 
     core_storage_update();
 }
@@ -47,7 +56,7 @@ function second(){
     core_storage_data['clicks'] = core_round({
       'decimals': 2,
       'number': core_storage_data['clicks'] + core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'],
-    }); Math.floor();
+    });
 
     core_storage_update();
 
