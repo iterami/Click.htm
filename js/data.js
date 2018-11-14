@@ -33,22 +33,13 @@ function purchase(upgrade, cost, target, free){
     core_storage_data['upgrade-' + upgrade] += 1;
     core_storage_data['upgrade-' + upgrade + '-cost'] *= upgrades[upgrade]['multiplier'];
 
-    // ...and increase target value, either clicks-per-click or clicks-per-second...
+    // ...and increase target value, either clicks-per-click or clicks-per-second.
     core_storage_data[target] = core_round({
       'decimals': 2,
       'number': core_storage_data[target] + upgrades[upgrade]['bonus'],
     });
 
-    // ...and recalculate multiplied values.
-    core_storage_data['clicks-per-click-multiplied'] = core_round({
-      'decimals': 2,
-      'number': core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'],
-    });
-    core_storage_data['clicks-per-second-multiplied'] = core_round({
-      'decimals': 2,
-      'number': core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'],
-    });
-
+    update_multiplied()
     core_storage_update();
 }
 
@@ -62,4 +53,15 @@ function second(){
 
     // Setting the title to # of clicks makes idling easier.
     document.title = core_storage_data['clicks'];
+}
+
+function update_multiplied(){
+    core_storage_data['clicks-per-click-multiplied'] = core_round({
+      'decimals': 2,
+      'number': core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'],
+    });
+    core_storage_data['clicks-per-second-multiplied'] = core_round({
+      'decimals': 2,
+      'number': core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'],
+    });
 }
