@@ -39,7 +39,7 @@ function purchase(upgrade, cost, target, free){
       'number': core_storage_data[target] + upgrades[upgrade]['bonus'],
     });
 
-    update_multiplied()
+    update_multiplied();
     core_storage_update();
 }
 
