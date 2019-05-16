@@ -51,8 +51,9 @@ function second(){
 
     core_storage_update();
 
-    // Setting the title to # of clicks makes idling easier.
-    document.title = core_storage_data['clicks'];
+    document.title = core_number_format({
+      'number': core_storage_data['clicks'],
+    });
 }
 
 function update_multiplied(){
