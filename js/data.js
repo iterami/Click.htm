@@ -7,7 +7,11 @@ function click_button(){
       'number': core_storage_data['clicks'] + core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'],
     });
 
-    core_storage_update();
+    core_storage_update({
+      'keys': [
+        'clicks',
+      ],
+    });
 
     core_ui_update({
       'ids': {
@@ -60,7 +64,11 @@ function second(){
       'number': core_storage_data['clicks'] + core_storage_data['clicks-per-second'] * core_storage_data['multiplier-per-second'],
     });
 
-    core_storage_update();
+    core_storage_update({
+      'keys': [
+        'clicks',
+      ],
+    });
 
     let formatted = core_number_format({
       'number': core_storage_data['clicks'],
