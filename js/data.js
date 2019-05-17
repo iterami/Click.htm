@@ -9,6 +9,14 @@ function click_button(){
 
     core_storage_update();
 
+    core_ui_update({
+      'ids': {
+        'ui-clicks': core_number_format({
+          'number': core_storage_data['clicks'],
+        }),
+      },
+    });
+
     // Force click-button to lose focus.
     document.getElementById('click-button').blur();
 }
