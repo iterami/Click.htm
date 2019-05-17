@@ -5,14 +5,21 @@
 <link href=../common/css/core.css rel=stylesheet>
 
 <span class=big id=ui-clicks></span><input class=hidden id=clicks><br>
-<div class="inline right">
-    <input class=medium id=click-button type=button value=Click><br>
-    click=<span class=medium id=clicks-per-click-multiplied></span><br>
-    <span id=clicks-per-click></span> x <span id=multiplier-per-click></span><br>
-    second=<span class=medium id=clicks-per-second-multiplied></span><br>
-    <span id=clicks-per-second></span> x <span id=multiplier-per-second></span>
-</div>
-<div class="inline left" id=upgrades></div>
+<table class=inline>
+  <tr>
+    <td colspan=2><input class=medium id=click-button type=button value=Click>
+  <tr>
+    <td>click
+    <td><span class=medium id=clicks-per-click-multiplied></span>
+  <tr>
+    <td colspan=2><span id=clicks-per-click></span> x <span id=multiplier-per-click></span>
+  <tr>
+    <td>second
+    <td><span class=medium id=clicks-per-second-multiplied></span>
+  <tr>
+    <td colspan=2><span id=clicks-per-second></span> x <span id=multiplier-per-second></span>
+</table>
+<table class=inline id=upgrades></table>
 
 <script src=../common/js/core.js></script>
 <script src=js/main.js></script>

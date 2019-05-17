@@ -72,9 +72,9 @@ function repo_init(){
         let upgrade = id[0].toUpperCase() + id.substring(1);
 
         document.getElementById('upgrades').innerHTML +=
-          '<span id=upgrade-' + id + '>0</span>'
-          + ' <input id=' + id + ' type=button value=' + upgrade + '>'
-          + ' <span id=ui-upgrade-' + id + '-cost></span>'
+          '<tr><td><span id=upgrade-' + id + '>0</span>'
+          + ' <td><input id=' + id + ' type=button value=' + upgrade + '>'
+          + ' <td><span id=ui-upgrade-' + id + '-cost></span>'
           + '<input class=hidden id=upgrade-' + id + '-cost><br>';
     }
 
