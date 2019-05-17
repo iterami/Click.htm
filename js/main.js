@@ -74,7 +74,8 @@ function repo_init(){
         document.getElementById('upgrades').innerHTML +=
           '<span id=upgrade-' + id + '>0</span>'
           + ' <input id=' + id + ' type=button value=' + upgrade + '>'
-          + ' <span id=upgrade-' + id + '-cost>' + (upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost']) +'</span><br>';
+          + ' <span id=ui-upgrade-' + id + '-cost></span>'
+          + '<input class=hidden id=upgrade-' + id + '-cost><br>';
     }
 
     for(let id in upgrades){
@@ -94,6 +95,10 @@ function repo_init(){
               upgrades[this.id]['target']
             );
         };
+
+        document.getElementById('ui-upgrade-' + id + '-cost').innerHTML = core_number_format({
+          'number': upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost'],
+        });
     }
 
     core_interval_modify({
@@ -103,4 +108,11 @@ function repo_init(){
     });
 
     core_storage_update();
+    core_ui_update({
+      'ids': {
+        'ui-clicks': core_number_format({
+          'number': core_storage_data['clicks'],
+        }),
+      },
+    });
 }
