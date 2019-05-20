@@ -39,6 +39,13 @@ function purchase(upgrade, cost, target, free){
           'decimals': 2,
           'number': core_storage_data['clicks'] - core_storage_data['upgrade-' + upgrade + '-cost'],
         });
+        core_ui_update({
+          'ids': {
+            'ui-clicks': core_number_format({
+              'number': core_storage_data['clicks'],
+            }),
+          },
+        });
     }
 
     // ...and increase upgrade/cost...
