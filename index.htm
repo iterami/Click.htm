@@ -4,7 +4,7 @@
 <title>Click.htm</title>
 <link href=../common/css/core.css rel=stylesheet>
 
-<span class=big id=ui-clicks></span><input class=hidden id=clicks><br>
+<div class=big id=ui-clicks></div><input class=hidden id=clicks>
 <table class=inline>
   <tr>
     <td colspan=2><input class=medium id=click-button type=button value=Click>
@@ -15,7 +15,10 @@
     <td><span class=medium id=clicks-per-second-multiplied></span>/second<br>
       <span id=clicks-per-second></span> x <span id=multiplier-per-second></span>
 </table>
-<table class=inline id=upgrades></table>
+<table class=inline>
+  <tbody id=upgrades>
+  </tbody>
+</table>
 
 <script src=../common/js/core.js></script>
 <script src=js/main.js></script>

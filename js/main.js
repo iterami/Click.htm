@@ -75,7 +75,7 @@ function repo_init(){
           '<tr><td><span id=upgrade-' + id + '>0</span>'
           + ' <td><input id=' + id + ' type=button value=' + upgrade + '>'
           + ' <td><span id=ui-upgrade-' + id + '-cost></span>'
-          + '<input class=hidden id=upgrade-' + id + '-cost><br>';
+          + '<input class=hidden id=upgrade-' + id + '-cost>';
     }
 
     for(let id in upgrades){
