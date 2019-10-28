@@ -97,6 +97,7 @@ function repo_init(){
         };
 
         document.getElementById('ui-upgrade-' + id + '-cost').innerHTML = core_number_format({
+          'decimals-min': 0,
           'number': upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost'],
         });
     }
@@ -111,6 +112,7 @@ function repo_init(){
     core_ui_update({
       'ids': {
         'ui-clicks': core_number_format({
+          'decimals-min': 2,
           'number': core_storage_data['clicks'],
         }),
       },

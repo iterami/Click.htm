@@ -16,6 +16,7 @@ function click_button(){
     core_ui_update({
       'ids': {
         'ui-clicks': core_number_format({
+          'decimals-min': 2,
           'number': core_storage_data['clicks'],
         }),
       },
@@ -42,6 +43,7 @@ function purchase(upgrade, cost, target, free){
         core_ui_update({
           'ids': {
             'ui-clicks': core_number_format({
+              'decimals-min': 2,
               'number': core_storage_data['clicks'],
             }),
           },
@@ -52,6 +54,7 @@ function purchase(upgrade, cost, target, free){
     core_storage_data['upgrade-' + upgrade] += 1;
     core_storage_data['upgrade-' + upgrade + '-cost'] *= upgrades[upgrade]['multiplier'];
     document.getElementById('ui-upgrade-' + upgrade + '-cost').innerHTML = core_number_format({
+      'decimals-min': 0,
       'number': core_storage_data['upgrade-' + upgrade + '-cost'],
     });
 
@@ -78,6 +81,7 @@ function second(){
     });
 
     let formatted = core_number_format({
+      'decimals-min': 2,
       'number': core_storage_data['clicks'],
     });
     core_ui_update({
