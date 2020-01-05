@@ -40,6 +40,12 @@ function repo_init(){
             'multiplier': 32,
             'target': 'clicks-per-second',
           },
+          'supercomputer': {
+            'bonus': 5,
+            'cost': 500,
+            'multiplier': 64,
+            'target': 'clicks-per-second',
+          },
           'coffeemaker': {
             'bonus': .1,
             'cost': 20,
@@ -98,7 +104,7 @@ function repo_init(){
 
         document.getElementById('ui-upgrade-' + id + '-cost').innerHTML = core_number_format({
           'decimals-min': 0,
-          'number': upgrades[id]['cost'] + core_storage_data['upgrade-' + id + '-cost'],
+          'number': core_storage_data['upgrade-' + id + '-cost'],
         });
     }
 
