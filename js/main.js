@@ -102,7 +102,7 @@ function repo_init(){
             );
         };
 
-        document.getElementById('ui-upgrade-' + id + '-cost').innerHTML = core_number_format({
+        document.getElementById('ui-upgrade-' + id + '-cost').textContent = core_number_format({
           'decimals-min': 0,
           'number': core_storage_data['upgrade-' + id + '-cost'],
         });

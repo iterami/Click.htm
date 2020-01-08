@@ -53,7 +53,7 @@ function purchase(upgrade, cost, target, free){
     // ...and increase upgrade/cost...
     core_storage_data['upgrade-' + upgrade] += 1;
     core_storage_data['upgrade-' + upgrade + '-cost'] *= upgrades[upgrade]['multiplier'];
-    document.getElementById('ui-upgrade-' + upgrade + '-cost').innerHTML = core_number_format({
+    document.getElementById('ui-upgrade-' + upgrade + '-cost').textContent = core_number_format({
       'decimals-min': 0,
       'number': core_storage_data['upgrade-' + upgrade + '-cost'],
     });
