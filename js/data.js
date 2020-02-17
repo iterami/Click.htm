@@ -85,7 +85,7 @@ function second(){
       ],
     });
 
-    let formatted = core_number_format({
+    const formatted = core_number_format({
       'decimals-min': 2,
       'number': core_storage_data['clicks'],
     });

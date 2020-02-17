@@ -74,8 +74,8 @@ function repo_init(){
 
     update_multiplied();
 
-    for(let id in upgrades){
-        let upgrade = id[0].toUpperCase() + id.substring(1);
+    for(const id in upgrades){
+        const upgrade = id[0].toUpperCase() + id.substring(1);
 
         document.getElementById('upgrades').innerHTML +=
           '<tr><td><span id=upgrade-' + id + '>0</span>'
@@ -84,8 +84,8 @@ function repo_init(){
           + '<input class=hidden id=upgrade-' + id + '-cost>';
     }
 
-    for(let id in upgrades){
-        let storage = {};
+    for(const id in upgrades){
+        const storage = {};
 
         storage['upgrade-' + id] = 0;
         storage['upgrade-' + id + '-cost'] = upgrades[id]['cost'];
