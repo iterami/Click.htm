@@ -74,15 +74,16 @@ function repo_init(){
 
     update_multiplied();
 
+    let upgradesHTML = '';
     for(const id in upgrades){
         const upgrade = id[0].toUpperCase() + id.substring(1);
 
-        document.getElementById('upgrades').innerHTML +=
-          '<tr><td><span id=upgrade-' + id + '>0</span>'
+        upgradesHTML += '<tr><td><span id=upgrade-' + id + '>0</span>'
           + ' <td><input id=' + id + ' type=button value=' + upgrade + '>'
           + ' <td><span id=ui-upgrade-' + id + '-cost></span>'
           + '<input class=hidden id=upgrade-' + id + '-cost>';
     }
+    document.getElementById('upgrades').innerHTML = upgradesHTML;
 
     for(const id in upgrades){
         const storage = {};
