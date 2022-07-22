@@ -5,17 +5,15 @@
 <link href=../common/css/core.css rel=stylesheet>
 
 <div class=big id=ui-clicks></div><input class=hidden id=clicks>
-<table class=inline>
-  <tr>
-    <td colspan=2><input class=medium id=click-button type=button value=Click>
-  <tr>
-    <td><span class=medium id=clicks-per-click-multiplied></span>/click<br>
-      <span id=clicks-per-click></span> x <span id=multiplier-per-click></span>
-  <tr>
-    <td><span class=medium id=clicks-per-second-multiplied></span>/second<br>
-      <span id=clicks-per-second></span> x <span id=multiplier-per-second></span>
-</table>
-<table class=inline>
+<table>
+  <tbody>
+      <tr>
+        <td><span class=medium id=clicks-per-click-multiplied></span>/click<br>
+          <span id=clicks-per-click></span> x <span id=multiplier-per-click></span>
+        <td><input class=big id=click-button type=button value=Click>
+        <td><span class=medium id=clicks-per-second-multiplied></span>/second<br>
+          <span id=clicks-per-second></span> x <span id=multiplier-per-second></span>
+  </tbody>
   <tbody id=upgrades>
   </tbody>
 </table>
