@@ -60,7 +60,7 @@ function repo_init(){
           },
         },
       },
-      'info': '<a href=../Docs.htm/repositories/click-htm.htm>Docs</a>',
+      'info': '<a href=../Docs.htm/repos/click-htm.htm>Docs</a>',
       'storage': {
         'clicks': 0,
         'clicks-per-click': 1,
