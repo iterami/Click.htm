@@ -89,7 +89,7 @@ function second(){
         'ui-clicks': formatted,
       },
     });
-    document.title = formatted;
+    document.title = formatted + ' - ' + core_repo_title;
 }
 
 function update_multiplied(){
