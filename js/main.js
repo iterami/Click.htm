@@ -82,7 +82,7 @@ function repo_init(){
         upgradesHTML += '<tr><td><span id=upgrade-' + id + '>0</span>'
           + ' <td><input id=' + id + ' type=button value=' + upgrade + '>'
           + ' <td><span id=ui-upgrade-' + id + '-cost></span>'
-          + '<input class=hidden id=upgrade-' + id + '-cost>';
+          + '<input class=hidden id=upgrade-' + id + '-cost type=text>';
     }
     document.getElementById('upgrades').innerHTML = upgradesHTML;
 
