@@ -141,7 +141,7 @@ function repo_init(){
         const upgrade = id[0].toUpperCase() + id.substring(1);
 
         upgradesHTML += '<tr><td><span id=upgrade-' + id + '>0</span>'
-          + ' <td><input id=' + id + ' type=button value=' + upgrade + '>'
+          + ' <td><button id=' + id + ' type=button>' + upgrade + '</button>'
           + ' <td><span id=ui-upgrade-' + id + '-cost></span>'
           + '<input class=hidden id=upgrade-' + id + '-cost type=text>';
     }
