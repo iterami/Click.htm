@@ -1,6 +1,8 @@
 'use strict';
 
 function click_button(event){
+    event.target.blur();
+
     core_storage_data['clicks'] = core_round({
       'decimals': 2,
       'number': core_storage_data['clicks'] + core_storage_data['clicks-per-click'] * core_storage_data['multiplier-per-click'],
@@ -18,8 +20,6 @@ function click_button(event){
         }),
       },
     });
-
-    event.target.blur();
 }
 
 function purchase(upgrade, cost, target, free){
