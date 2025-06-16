@@ -15,7 +15,7 @@ function click_button(event){
     core_ui_update({
       'ids': {
         'ui_clicks': core_number_format({
-          'decimals-min': 2,
+          'decimals_min': 2,
           'number': core_storage_data.clicks,
         }),
       },
@@ -38,7 +38,7 @@ function purchase(upgrade, cost, target, free){
         core_ui_update({
           'ids': {
             'ui_clicks': core_number_format({
-              'decimals-min': 2,
+              'decimals_min': 2,
               'number': core_storage_data.clicks,
             }),
           },
@@ -48,7 +48,7 @@ function purchase(upgrade, cost, target, free){
     core_storage_data['upgrade_' + upgrade] += 1;
     core_storage_data['upgrade_' + upgrade + '_cost'] *= upgrades[upgrade].multiplier;
     document.getElementById('ui_upgrade_' + upgrade + '_cost').textContent = core_number_format({
-      'decimals-min': 0,
+      'decimals_min': 0,
       'number': core_storage_data['upgrade_' + upgrade + '_cost'],
     });
 
@@ -169,7 +169,7 @@ function repo_init(){
         };
 
         document.getElementById('ui_upgrade_' + id + '_cost').textContent = core_number_format({
-          'decimals-min': 0,
+          'decimals_min': 0,
           'number': core_storage_data['upgrade_' + id + '_cost'],
         });
     }
@@ -184,7 +184,7 @@ function repo_init(){
     core_ui_update({
       'ids': {
         'ui_clicks': core_number_format({
-          'decimals-min': 2,
+          'decimals_min': 2,
           'number': core_storage_data.clicks,
         }),
       },
@@ -205,7 +205,7 @@ function second(){
     ]);
 
     const formatted = core_number_format({
-      'decimals-min': 2,
+      'decimals_min': 2,
       'number': core_storage_data.clicks,
     });
     core_ui_update({
