@@ -48,7 +48,6 @@ function purchase(upgrade, cost, target, free){
     core_storage_data['upgrade_' + upgrade] += 1;
     core_storage_data['upgrade_' + upgrade + '_cost'] *= upgrades[upgrade].multiplier;
     document.getElementById('ui_upgrade_' + upgrade + '_cost').textContent = core_number_format({
-      'decimals_min': 0,
       'number': core_storage_data['upgrade_' + upgrade + '_cost'],
     });
 
@@ -169,7 +168,6 @@ function repo_init(){
         };
 
         document.getElementById('ui_upgrade_' + id + '_cost').textContent = core_number_format({
-          'decimals_min': 0,
           'number': core_storage_data['upgrade_' + id + '_cost'],
         });
     }
