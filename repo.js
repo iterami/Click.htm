@@ -123,7 +123,7 @@ function repo_init(){
           },
         },
       },
-      'info': '<a href=../Docs.htm/repos/click-htm.htm>Docs</a>',
+      'info': '<a href=../Docs.htm/repos/click-htm.htm target=_blank>View Docs for Click.htm</a>',
       'storage': {
         'clicks': 0,
         'clicks_per_click': 1,
