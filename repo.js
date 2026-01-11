@@ -198,9 +198,12 @@ function second(){
     core_storage_update([
       'clicks',
     ]);
-    core_storage_save([
-      'clicks',
-    ]);
+    core_storage_save({
+      'keys': [
+        'clicks',
+      ],
+      'rebind': false,
+    });
 
     const formatted = core_number_format({
       'decimals_min': 2,
