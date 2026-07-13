@@ -8,9 +8,7 @@ function click_button(event){
       'number': core_storage_data.clicks + core_storage_data.clicks_per_click * core_storage_data.multiplier_per_click,
     });
 
-    core_storage_update([
-      'clicks',
-    ]);
+    core_storage_update(['clicks']);
 
     core_ui_update({
       'ids': {
@@ -62,9 +60,7 @@ function purchase(upgrade, cost, target, free){
 
 function repo_init(){
     core_repo_init({
-      'beforeunload': {
-        'todo': core_storage_save,
-      },
+      'beforeunload': core_storage_save,
       'events': {
         'click_button': {
           'onclick': click_button,
@@ -195,13 +191,9 @@ function second(){
       'number': core_storage_data.clicks + core_storage_data.clicks_per_second * core_storage_data.multiplier_per_second,
     });
 
-    core_storage_update([
-      'clicks',
-    ]);
+    core_storage_update(['clicks']);
     core_storage_save({
-      'keys': [
-        'clicks',
-      ],
+      'keys': ['clicks'],
       'rebind': false,
     });
 
