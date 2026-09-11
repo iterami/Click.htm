@@ -60,7 +60,6 @@ function purchase(upgrade, cost, target, free){
 
 function repo_init(){
     core_repo_init({
-      'beforeunload': core_storage_save,
       'events': {
         'click_button': {
           'onclick': click_button,
