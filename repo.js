@@ -192,7 +192,6 @@ function second(){
 
     core_storage_update(['clicks']);
     core_storage_save({
-      'keys': ['clicks'],
       'rebind': false,
     });
 
